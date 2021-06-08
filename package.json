@@ -9,7 +9,10 @@
   ],
   "author": "Jose Guillermo",
   "license": "MIT",
-  "repository": "jguillermo/node-base-ddd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jguillermo/node-base-ddd"
+  },
   "engines": {
     "node": ">=10"
   },
@@ -32,7 +35,10 @@
     "lint-fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "semantic-release": "semantic-release --branches main",
+    "commit": "git-cz",
+    "acp": "git add . && npm run commit && git push"
   },
   "dependencies": {
     "underscore.string": "^3.3.5",
@@ -44,12 +50,14 @@
     "@types/validator": "^13.1.3",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "7.2.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.6.3",
     "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
+    "semantic-release": "^17.4.3",
     "ts-jest": "^26.4.3",
     "ts-loader": "^8.0.8",
     "ts-node": "^9.0.0",
@@ -81,5 +89,10 @@
       }
     },
     "testEnvironment": "node"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
