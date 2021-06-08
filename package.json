@@ -1,6 +1,6 @@
 {
   "name": "base-ddd",
-  "version": "0.0.6",
+  "version": "0.0.0-development",
   "description": "Node base DDD",
   "keywords": [
     "DDD",
@@ -36,7 +36,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "semantic-release": "semantic-release --branches main",
+    "semantic-release": "semantic-release",
     "commit": "git-cz",
     "acp": "git add . && npm run commit && git push"
   },
