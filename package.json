@@ -37,7 +37,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "semantic-release": "semantic-release --branches main",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "acp": "git add . && npm run commit && git push"
   },
   "dependencies": {
     "underscore.string": "^3.3.5",
