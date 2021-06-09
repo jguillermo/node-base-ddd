@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := test
 ## GENERAL ##
 
 install:
@@ -29,13 +29,12 @@ test-unit-cov:
 	npm run test:cov
 
 test:
-	#npm --prefix "ddd-cli" run test:cov
+	@make tools
 	@make format
 	@make lint
 	@make test-unit-cov
 
 tools:
-	#npm --prefix "ddd-cli" run test:cov
 	@make format-fix
 	@make lint-fix
 
