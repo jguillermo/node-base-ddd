@@ -6,4 +6,7 @@ npm i base-ddd
 ----
 
 ### value object
-tipos (value object) para validación de datos 
+type valueos for wrap primive values
+number
+string
+bool
