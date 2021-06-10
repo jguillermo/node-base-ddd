@@ -1,5 +1,5 @@
-import { BooleanTypeImp } from './Implement/BooleanTypeImp';
 import { ValueGenerator } from './base.spec';
+import { BooleanTypeImp } from '../../ValueObject/Implement/BooleanTypeImp';
 
 describe('String Type', () => {
   let type: BooleanTypeImp;
