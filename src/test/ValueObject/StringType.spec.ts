@@ -1,5 +1,5 @@
-import { StringTypeImp } from './Implement/StringTypeImp';
 import { ValueGenerator } from './base.spec';
+import { StringTypeImp } from '../../ValueObject/Implement/StringTypeImp';
 
 describe('String Type', () => {
   let type: StringTypeImp;
