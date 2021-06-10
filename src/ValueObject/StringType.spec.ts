@@ -1,4 +1,5 @@
 import { StringTypeImp } from './Implement/StringTypeImp';
+import { ValueGenerator } from './base.spec';
 
 describe('String Type', () => {
   let type: StringTypeImp;
@@ -27,6 +28,42 @@ describe('String Type', () => {
       it('undefined equals null', () => {
         type = new StringTypeImp(undefined);
         expect(type.value).toEqual(null);
+      });
+    });
+    describe('set invalid value', () => {
+      describe('boolean', () => {
+        it('true', () => {
+          type = new StringTypeImp(ValueGenerator.valueBoolean(true));
+          expect(type.value).toEqual('true');
+        });
+        it('false', () => {
+          type = new StringTypeImp(ValueGenerator.valueBoolean(false));
+          expect(type.value).toEqual('false');
+        });
+      });
+      describe('number', () => {
+        it('positive', () => {
+          type = new StringTypeImp(ValueGenerator.valueNumber(1));
+          expect(type.value).toEqual('1');
+          type = new StringTypeImp(ValueGenerator.valueNumber(1.1));
+          expect(type.value).toEqual('1.1');
+          type = new StringTypeImp(ValueGenerator.valueNumber(0.1));
+          expect(type.value).toEqual('0.1');
+        });
+
+        it('negative', () => {
+          type = new StringTypeImp(ValueGenerator.valueNumber(-1));
+          expect(type.value).toEqual('-1');
+          type = new StringTypeImp(ValueGenerator.valueNumber(-1.1));
+          expect(type.value).toEqual('-1.1');
+          type = new StringTypeImp(ValueGenerator.valueNumber(-0.1));
+          expect(type.value).toEqual('-0.1');
+        });
+
+        it('zero', () => {
+          type = new StringTypeImp(ValueGenerator.valueNumber(0));
+          expect(type.value).toEqual('0');
+        });
       });
     });
   });

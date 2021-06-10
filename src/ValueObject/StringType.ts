@@ -2,7 +2,12 @@ import { BaseType } from './BaseType';
 import validator from 'validator';
 import isEmptyValidator = validator.isEmpty;
 import isLengthValidator = validator.isLength;
-import { StringIsLengthValidator } from './StringIsLengthValidator';
+
+export interface StringIsLengthValidator {
+  min?: number;
+  max?: number;
+  exactly?: number;
+}
 
 export abstract class StringType extends BaseType<string> {
   get isEmpty(): boolean {
@@ -32,5 +37,15 @@ export abstract class StringType extends BaseType<string> {
       return '';
     }
     return <string>this.value;
+  }
+
+  protected filter(value: any): string | null {
+    if (value === null) {
+      return null;
+    }
+    if (typeof value === 'boolean') {
+      return value ? 'true' : 'false';
+    }
+    return `${value}`;
   }
 }
