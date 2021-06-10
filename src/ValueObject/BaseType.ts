@@ -1,5 +1,9 @@
 export abstract class BaseType<T> {
-  constructor(protected _value: T | null = null) {}
+  protected _value: T | null;
+
+  constructor(value: T | null = null) {
+    this._value = this.filter(value);
+  }
 
   get value(): T | null {
     return this._value;
@@ -10,4 +14,8 @@ export abstract class BaseType<T> {
   }
 
   abstract get toString(): string;
+
+  protected filter(value: any): T | null {
+    return value;
+  }
 }
