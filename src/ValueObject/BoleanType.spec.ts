@@ -47,25 +47,25 @@ describe('String Type', () => {
       });
       describe('number', () => {
         it('positive', () => {
-          type = new BooleanTypeImp(ValueGenerator.valueBooleanNumber(1));
+          type = new BooleanTypeImp(ValueGenerator.valueNumber(1));
           expect(type.value).toEqual(true);
-          type = new BooleanTypeImp(ValueGenerator.valueBooleanNumber(1.1));
+          type = new BooleanTypeImp(ValueGenerator.valueNumber(1.1));
           expect(type.value).toEqual(true);
-          type = new BooleanTypeImp(ValueGenerator.valueBooleanNumber(0.1));
+          type = new BooleanTypeImp(ValueGenerator.valueNumber(0.1));
           expect(type.value).toEqual(true);
         });
 
         it('negative', () => {
-          type = new BooleanTypeImp(ValueGenerator.valueBooleanNumber(-1));
+          type = new BooleanTypeImp(ValueGenerator.valueNumber(-1));
           expect(type.value).toEqual(true);
-          type = new BooleanTypeImp(ValueGenerator.valueBooleanNumber(-1.1));
+          type = new BooleanTypeImp(ValueGenerator.valueNumber(-1.1));
           expect(type.value).toEqual(true);
-          type = new BooleanTypeImp(ValueGenerator.valueBooleanNumber(-0.1));
+          type = new BooleanTypeImp(ValueGenerator.valueNumber(-0.1));
           expect(type.value).toEqual(true);
         });
 
         it('zero', () => {
-          type = new BooleanTypeImp(ValueGenerator.valueBooleanNumber(0));
+          type = new BooleanTypeImp(ValueGenerator.valueNumber(0));
           expect(type.value).toEqual(false);
         });
       });

@@ -1,4 +1,5 @@
 import { NumberTypeImp } from './Implement/NumberTypeImp';
+import { ValueGenerator } from './base.spec';
 
 describe('Number Type', () => {
   let type: NumberTypeImp;
@@ -36,6 +37,48 @@ describe('Number Type', () => {
       it('undefined equals null', () => {
         type = new NumberTypeImp(undefined);
         expect(type.value).toEqual(null);
+      });
+    });
+    describe('set invalid value', () => {
+      describe('boolean', () => {
+        it('true', () => {
+          type = new NumberTypeImp(ValueGenerator.valueBoolean(true));
+          expect(type.value).toEqual(1);
+        });
+        it('false', () => {
+          type = new NumberTypeImp(ValueGenerator.valueBoolean(false));
+          expect(type.value).toEqual(0);
+        });
+      });
+      describe('string', () => {
+        it('empty', () => {
+          type = new NumberTypeImp(ValueGenerator.valueString(''));
+          expect(type.value).toEqual(0);
+        });
+
+        it('number positive', () => {
+          type = new NumberTypeImp(ValueGenerator.valueString('1'));
+          expect(type.value).toEqual(1);
+          type = new NumberTypeImp(ValueGenerator.valueString('1.1'));
+          expect(type.value).toEqual(1.1);
+        });
+
+        it('number negative', () => {
+          type = new NumberTypeImp(ValueGenerator.valueString('-1'));
+          expect(type.value).toEqual(-1);
+          type = new NumberTypeImp(ValueGenerator.valueString('-1.1'));
+          expect(type.value).toEqual(-1.1);
+        });
+
+        it('number Zero', () => {
+          type = new NumberTypeImp(ValueGenerator.valueString('0'));
+          expect(type.value).toEqual(0);
+        });
+
+        it('random', () => {
+          type = new NumberTypeImp(ValueGenerator.valueString('random'));
+          expect(type.value).toEqual(0);
+        });
       });
     });
   });

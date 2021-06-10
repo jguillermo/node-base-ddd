@@ -15,7 +15,5 @@ export abstract class BaseType<T> {
 
   abstract get toString(): string;
 
-  protected filter(value: any): T | null {
-    return value;
-  }
+  protected abstract filter(value: any): T | null;
 }
