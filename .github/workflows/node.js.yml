@@ -27,6 +27,10 @@ jobs:
       - name: install dependencies
         run:  make install
 
+      - name: Prints the current branch name
+        run: echo "${GITHUB_BRANCH}"
+        env:
+          GITHUB_BRANCH: ${{ github.ref }}
   format:
     runs-on: ubuntu-latest
     needs: [ load-cache ]
