@@ -115,7 +115,7 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     needs: [ load-cache, format, lint, test-unit-cov ]
     strategy:
       matrix:
