@@ -1,14 +1,35 @@
 name: Cli check
 
-on:
-  push:
-    branches: [ feature/** ]
-  pull_request:
-    branches: [ master ]
+on: push
 
 jobs:
+
+  load-cache:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: install dependencies
+        run:  make install
+
   format:
     runs-on: ubuntu-latest
+    needs: [ load-cache ]
     strategy:
       matrix:
         node-version: [14.x]
@@ -21,15 +42,11 @@ jobs:
 
     - name: Cache node modules
       uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+          ${{ runner.os }}-node-
 
     - name: install dependencies
       run:  make install
@@ -40,6 +57,7 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    needs: [ load-cache ]
     strategy:
       matrix:
         node-version: [14.x]
@@ -52,15 +70,11 @@ jobs:
 
     - name: Cache node modules
       uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+          ${{ runner.os }}-node-
 
     - name: install dependencies
       run:  make install
@@ -70,6 +84,7 @@ jobs:
 
   test-unit-cov:
     runs-on: ubuntu-latest
+    needs: [ load-cache, format, lint ]
     strategy:
       matrix:
         node-version: [14.x]
@@ -82,18 +97,60 @@ jobs:
 
     - name: Cache node modules
       uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+          ${{ runner.os }}-node-
 
     - name: install dependencies
       run:  make install
 
     - name: unit testing
       run: make test-unit-cov
+
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [ load-cache, format, lint, test-unit-cov ]
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: install dependencies
+        run:  make install
+
+      - name: build
+        run: make build
+
+      - name: npm-whoami
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: npm whoami --registry https://registry.npmjs.org/
+
+      - name: semantic-release
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: npm run semantic-release
