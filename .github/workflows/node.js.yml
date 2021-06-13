@@ -88,7 +88,7 @@ jobs:
 
   test-unit-cov:
     runs-on: ubuntu-latest
-    needs: [ load-cache, format, lint ]
+    needs: [ format, lint ]
     strategy:
       matrix:
         node-version: [14.x]
@@ -116,7 +116,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/master' }}
-    needs: [ load-cache, format, lint, test-unit-cov ]
+    needs: [ test-unit-cov ]
     strategy:
       matrix:
         node-version: [14.x]
