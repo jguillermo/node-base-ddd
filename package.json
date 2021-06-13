@@ -41,6 +41,7 @@
     "acp": "git add . && npm run commit && git push"
   },
   "dependencies": {
+    "dayjs": "^1.10.5",
     "underscore.string": "^3.3.5",
     "validator": "^13.6.0"
   },
@@ -96,6 +97,8 @@
     }
   },
   "release": {
-    "branches": ["master"]
+    "branches": [
+      "master"
+    ]
   }
 }
