@@ -13,6 +13,10 @@ export abstract class BaseType<T> {
     return this._value === null;
   }
 
+  get isNotNull(): boolean {
+    return !this.isNull;
+  }
+
   abstract get toString(): string;
 
   protected abstract filter(value: any): T | null;
