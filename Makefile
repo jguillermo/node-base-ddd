@@ -13,6 +13,9 @@ build:
 lint:
 	npm run lint
 
+commit:
+	npm run commit
+
 lint-fix:
 	npm run lint-fix
 
