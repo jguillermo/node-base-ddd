@@ -17,6 +17,14 @@ export abstract class BaseType<T> {
     return !this.isNull;
   }
 
+  isValid(): boolean {
+    return true;
+  }
+
+  static validatorMessage(): string {
+    return '';
+  }
+
   abstract get toString(): string;
 
   protected abstract filter(value: any): T | null;

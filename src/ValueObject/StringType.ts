@@ -46,6 +46,7 @@ export abstract class StringType extends BaseType<string> {
     if (typeof value === 'boolean') {
       return value ? 'true' : 'false';
     }
+    //todo validate object and array in string
     return `${value}`;
   }
 }
