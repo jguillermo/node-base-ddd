@@ -45,14 +45,17 @@ describe('TestBaseType', () => {
     const object = new TestBaseType();
     expect(object.isNull).toEqual(true);
   });
+
   it('is not null', () => {
     const object = new TestBaseType();
     expect(object.isNotNull).toEqual(false);
   });
+
   it('valid', () => {
     const object = new TestBaseType();
     expect(object.isValid()).toEqual(true);
   });
+
   it('valid message', () => {
     expect(TestBaseType.validatorMessage()).toEqual('');
   });
