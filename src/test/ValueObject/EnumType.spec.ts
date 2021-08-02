@@ -33,55 +33,55 @@ describe('Enum Type', () => {
         it('OTHER', () => {
           expect(() => {
             new EnumTypeImp('OTHER');
-          }).toThrow('Value OTHER is not in Enum');
+          }).toThrow('value OTHER is not in Enum.');
         });
         it('empty', () => {
           expect(() => {
             new EnumTypeImp('');
-          }).toThrow(`Value  is not in Enum`);
+          }).toThrow(`value  is not in Enum.`);
         });
       });
       describe('boolean', () => {
         it('true', () => {
           expect(() => {
             new EnumTypeImp(ValueGenerator.valueBoolean(true));
-          }).toThrow(`Value true is not in Enum`);
+          }).toThrow(`value true is not in Enum.`);
         });
         it('false', () => {
           expect(() => {
             new EnumTypeImp(ValueGenerator.valueBoolean(false));
-          }).toThrow(`Value false is not in Enum`);
+          }).toThrow(`value false is not in Enum.`);
         });
       });
       describe('number', () => {
         it('positive', () => {
           expect(() => {
             new EnumTypeImp(ValueGenerator.valueNumber(1));
-          }).toThrow(`Value 1 is not in Enum`);
+          }).toThrow(`value 1 is not in Enum.`);
           expect(() => {
             new EnumTypeImp(ValueGenerator.valueNumber(1.1));
-          }).toThrow(`Value 1.1 is not in Enum`);
+          }).toThrow(`value 1.1 is not in Enum.`);
           expect(() => {
             new EnumTypeImp(ValueGenerator.valueNumber(0.1));
-          }).toThrow(`Value 0.1 is not in Enum`);
+          }).toThrow(`value 0.1 is not in Enum.`);
         });
 
         it('negative', () => {
           expect(() => {
             new EnumTypeImp(ValueGenerator.valueNumber(-1));
-          }).toThrow(`Value -1 is not in Enum`);
+          }).toThrow(`value -1 is not in Enum.`);
           expect(() => {
             new EnumTypeImp(ValueGenerator.valueNumber(-1.1));
-          }).toThrow(`Value -1.1 is not in Enum`);
+          }).toThrow(`value -1.1 is not in Enum.`);
           expect(() => {
             new EnumTypeImp(ValueGenerator.valueNumber(-0.1));
-          }).toThrow(`Value -0.1 is not in Enum`);
+          }).toThrow(`value -0.1 is not in Enum.`);
         });
 
         it('zero', () => {
           expect(() => {
             new EnumTypeImp(ValueGenerator.valueNumber(0));
-          }).toThrow(`Value 0 is not in Enum`);
+          }).toThrow(`value 0 is not in Enum.`);
         });
       });
     });

@@ -39,60 +39,60 @@ describe('UUID Type', () => {
         it('empty', () => {
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueString(''));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
         it('random', () => {
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueString('random'));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
         it('special carateres', () => {
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueString('áéíóú'));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
       });
       describe('boolean', () => {
         it('true', () => {
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueBoolean(true));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
         it('false', () => {
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueBoolean(false));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
       });
       describe('number', () => {
         it('positive', () => {
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueNumber(1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueNumber(1.1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueNumber(0.1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
 
         it('negative', () => {
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueNumber(-1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueNumber(-1.1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueNumber(-0.1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
 
         it('zero', () => {
           expect(() => {
             new UUIDTypeImp(ValueGenerator.valueNumber(0));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
       });
     });
