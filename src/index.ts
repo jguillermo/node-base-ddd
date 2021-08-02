@@ -16,3 +16,6 @@ export * from './ValueObject/Implement/IdTypeImp';
 export * from './ValueObject/Implement/NumberTypeImp';
 export * from './ValueObject/Implement/StringTypeImp';
 export * from './ValueObject/Implement/UUIDTypeImp';
+
+//validator inteface
+export * from './validate/ValidatorInterface';

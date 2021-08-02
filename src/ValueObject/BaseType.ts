@@ -1,4 +1,6 @@
-export abstract class BaseType<T> {
+import { ValidatorInterface } from '../validate/ValidatorInterface';
+
+export abstract class BaseType<T> implements ValidatorInterface {
   protected _value: T | null;
 
   constructor(value: T | null = null) {
@@ -21,8 +23,8 @@ export abstract class BaseType<T> {
     return true;
   }
 
-  static validatorMessage(): string {
-    return '';
+  validatorMessage(): string {
+    return 'value ($value) is not valid.';
   }
 
   abstract get toString(): string;
