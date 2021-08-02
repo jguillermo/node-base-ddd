@@ -17,7 +17,7 @@ export abstract class EnumType<T> extends BaseType<T> {
       return null;
     }
     if (!this.enumValues().includes(value)) {
-      throw new Error(`Value ${value} is not in Enum`);
+      throw new Error(`value ${value} is not in Enum.`);
     }
     return value;
   }

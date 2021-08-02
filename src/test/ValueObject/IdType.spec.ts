@@ -27,14 +27,14 @@ describe('Id Type', () => {
         it('null', () => {
           expect(() => {
             new IdTypeImp();
-          }).toThrow(`Id is required`);
+          }).toThrow(`is required.`);
         });
       });
       describe('undefined', () => {
         it('undefined equals null', () => {
           expect(() => {
             new IdTypeImp(undefined);
-          }).toThrow(`Id is required`);
+          }).toThrow(`is required.`);
         });
       });
 
@@ -42,60 +42,60 @@ describe('Id Type', () => {
         it('empty', () => {
           expect(() => {
             new IdTypeImp(ValueGenerator.valueString(''));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
         it('random', () => {
           expect(() => {
             new IdTypeImp(ValueGenerator.valueString('random'));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
         it('special carateres', () => {
           expect(() => {
             new IdTypeImp(ValueGenerator.valueString('áéíóú'));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
       });
       describe('boolean', () => {
         it('true', () => {
           expect(() => {
             new IdTypeImp(ValueGenerator.valueBoolean(true));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
         it('false', () => {
           expect(() => {
             new IdTypeImp(ValueGenerator.valueBoolean(false));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
       });
       describe('number', () => {
         it('positive', () => {
           expect(() => {
             new IdTypeImp(ValueGenerator.valueNumber(1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
           expect(() => {
             new IdTypeImp(ValueGenerator.valueNumber(1.1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
           expect(() => {
             new IdTypeImp(ValueGenerator.valueNumber(0.1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
 
         it('negative', () => {
           expect(() => {
             new IdTypeImp(ValueGenerator.valueNumber(-1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
           expect(() => {
             new IdTypeImp(ValueGenerator.valueNumber(-1.1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
           expect(() => {
             new IdTypeImp(ValueGenerator.valueNumber(-0.1));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
 
         it('zero', () => {
           expect(() => {
             new IdTypeImp(ValueGenerator.valueNumber(0));
-          }).toThrow(`Invalid uuid value`);
+          }).toThrow(`invalid uuid value.`);
         });
       });
     });

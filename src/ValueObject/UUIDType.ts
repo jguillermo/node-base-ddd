@@ -19,10 +19,10 @@ export abstract class UUIDType extends BaseType<string> {
       return null;
     }
     if (typeof value !== 'string') {
-      throw new Error(`Invalid uuid value`);
+      throw new Error(`invalid uuid value.`);
     }
     if (!uuidValidate(value)) {
-      throw new Error(`Invalid uuid value`);
+      throw new Error(`invalid uuid value.`);
     }
     return <string>value;
   }

@@ -9,11 +9,11 @@ export abstract class DateType extends BaseType<string> {
       return null;
     }
     if (typeof value === 'boolean' || typeof value === 'number') {
-      throw new Error(`Date is not valid`);
+      throw new Error(`date is not valid.`);
     }
     const _dateAux = dayjs.utc(value);
     if (!_dateAux.isValid()) {
-      throw new Error(`Date is not valid`);
+      throw new Error(`date is not valid.`);
     }
     return _dateAux.toISOString();
   }

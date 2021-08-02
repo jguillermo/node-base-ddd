@@ -48,97 +48,97 @@ describe('String Type', () => {
         it('day', () => {
           expect(() => {
             new DateTypeImp('2018-03-33T16:02:15.000Z');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
         it('month', () => {
           expect(() => {
             new DateTypeImp('2018-13-23T16:02:15.000Z');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
         it('year', () => {
           expect(() => {
             new DateTypeImp('1-03-23T16:02:15.000Z');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
         it('hour', () => {
           expect(() => {
             new DateTypeImp('2018-03-23T25:02:15.000Z');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
         it('minutes', () => {
           expect(() => {
             new DateTypeImp('2018-03-23T15:61:15.000Z');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
         it('seconds', () => {
           expect(() => {
             new DateTypeImp('2018-03-23T15:02:61.000Z');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
         it.skip('only time', () => {
           expect(() => {
             new DateTypeImp('15:02:61');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
       });
       describe('string', () => {
         it('Empty', () => {
           expect(() => {
             new DateTypeImp('');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
         it('randoem string', () => {
           expect(() => {
             new DateTypeImp('abc');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
           expect(() => {
             new DateTypeImp('áéíóú');
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
       });
       describe('boolean', () => {
         it('true', () => {
           expect(() => {
             new DateTypeImp(ValueGenerator.valueBoolean(true));
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
         it('false', () => {
           expect(() => {
             new DateTypeImp(ValueGenerator.valueBoolean(false));
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
       });
       describe('number', () => {
         it('positive', () => {
           expect(() => {
             new DateTypeImp(ValueGenerator.valueNumber(1));
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
 
           expect(() => {
             new DateTypeImp(ValueGenerator.valueNumber(1.1));
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
 
           expect(() => {
             new DateTypeImp(ValueGenerator.valueNumber(0.1));
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
 
         it('negative', () => {
           expect(() => {
             new DateTypeImp(ValueGenerator.valueNumber(-1));
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
           expect(() => {
             new DateTypeImp(ValueGenerator.valueNumber(-1.1));
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
           expect(() => {
             new DateTypeImp(ValueGenerator.valueNumber(-0.1));
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
 
         it('zero', () => {
           expect(() => {
             new DateTypeImp(ValueGenerator.valueNumber(0));
-          }).toThrow(`Date is not valid`);
+          }).toThrow(`date is not valid.`);
         });
       });
     });
