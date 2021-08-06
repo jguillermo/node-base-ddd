@@ -17,6 +17,10 @@ export * from './ValueObject/Implement/NumberTypeImp';
 export * from './ValueObject/Implement/StringTypeImp';
 export * from './ValueObject/Implement/UUIDTypeImp';
 
+//validator
+export * from './Validator/ValidatorInterface';
+export * from './Validator/DomainValidator';
+
 //event
 export * from './Event/EventBase';
 
