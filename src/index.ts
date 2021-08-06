@@ -26,3 +26,6 @@ export * from './Event/EventBase';
 
 //aggregate
 export * from './Aggregate/AggregateRoot';
+
+//repository
+export * from './Repository/Filter';
