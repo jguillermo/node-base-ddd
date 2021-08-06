@@ -1,4 +1,4 @@
-import { ValueGenerator } from './base.spec';
+import { ValueGenerator } from './BaseType.spec';
 import { NumberTypeImp } from '../../ValueObject/Implement/NumberTypeImp';
 
 describe('Number Type', () => {
