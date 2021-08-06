@@ -17,5 +17,8 @@ export * from './ValueObject/Implement/NumberTypeImp';
 export * from './ValueObject/Implement/StringTypeImp';
 export * from './ValueObject/Implement/UUIDTypeImp';
 
-//validator inteface
-export * from './validate/ValidatorInterface';
+//event
+export * from './Event/EventBase';
+
+//aggregate
+export * from './Aggregate/AggregateRoot';
