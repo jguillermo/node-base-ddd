@@ -56,7 +56,7 @@ describe('TestBaseType', () => {
     expect(object.isValid()).toEqual(true);
   });
 
-  it('valid message', () => {
+  it('valid default message', () => {
     const object = new TestBaseType();
     expect(object.validatorMessage()).toEqual('value ($value) is not valid.');
   });

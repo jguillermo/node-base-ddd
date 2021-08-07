@@ -1,4 +1,4 @@
-import { ValueGenerator } from './base.spec';
+import { ValueGenerator } from './BaseType.spec';
 import { DateTypeImp } from '../../ValueObject/Implement/DateTypeImp';
 
 describe('String Type', () => {

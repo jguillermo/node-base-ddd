@@ -1,4 +1,4 @@
-import { ValueGenerator } from './base.spec';
+import { ValueGenerator } from './BaseType.spec';
 import { UUIDTypeImp } from '../../ValueObject/Implement/UUIDTypeImp';
 import { validate as uuidValidate } from 'uuid';
 

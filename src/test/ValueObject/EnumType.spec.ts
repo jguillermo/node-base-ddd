@@ -1,5 +1,5 @@
 import { EnumTypeImp } from '../../ValueObject/Implement/EnumTypeImp';
-import { ValueGenerator } from './base.spec';
+import { ValueGenerator } from './BaseType.spec';
 
 describe('Enum Type', () => {
   let type: EnumTypeImp;

@@ -17,5 +17,15 @@ export * from './ValueObject/Implement/NumberTypeImp';
 export * from './ValueObject/Implement/StringTypeImp';
 export * from './ValueObject/Implement/UUIDTypeImp';
 
-//validator inteface
-export * from './validate/ValidatorInterface';
+//validator
+export * from './Validator/ValidatorInterface';
+export * from './Validator/DomainValidator';
+
+//event
+export * from './Event/EventBase';
+
+//aggregate
+export * from './Aggregate/AggregateRoot';
+
+//repository
+export * from './Repository/Filter';
