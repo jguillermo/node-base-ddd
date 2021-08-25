@@ -3,8 +3,13 @@ import * as utc from 'dayjs/plugin/utc';
 import { BaseType } from './BaseType';
 
 dayjs.extend(utc);
-export abstract class DateType extends BaseType<string> {
-  protected filter(value: any): string | null {
+
+export abstract class DateType extends BaseType<Date> {
+  constructor(value: any = null) {
+    super(value);
+  }
+
+  protected filter(value: any): Date | null {
     if (value === null) {
       return null;
     }
@@ -15,13 +20,15 @@ export abstract class DateType extends BaseType<string> {
     if (!_dateAux.isValid()) {
       throw new Error(`date is not valid.`);
     }
-    return _dateAux.toISOString();
+    return new Date(_dateAux.toISOString());
   }
 
   get toString(): string {
     if (this.isNull) {
       return '';
     }
-    return <string>this.value;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return this.value.toISOString();
   }
 }

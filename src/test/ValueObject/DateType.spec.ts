@@ -7,27 +7,47 @@ describe('String Type', () => {
     describe('set valid string date', () => {
       it('ISO 8601 complete', () => {
         type = new DateTypeImp('2018-03-23T16:02:15.000Z');
-        expect(type.value).toEqual('2018-03-23T16:02:15.000Z');
+        expect(type.value).toEqual(new Date('2018-03-23T16:02:15.000Z'));
       });
       it('ISO 8601 partial', () => {
         type = new DateTypeImp('2018-03-23');
-        expect(type.value).toEqual('2018-03-23T00:00:00.000Z');
+        expect(type.value).toEqual(new Date('2018-03-23T00:00:00.000Z'));
       });
       it('ISO 8601 no time zone T', () => {
         type = new DateTypeImp('2018-03-23 16:02:15.000Z');
-        expect(type.value).toEqual('2018-03-23T16:02:15.000Z');
+        expect(type.value).toEqual(new Date('2018-03-23T16:02:15.000Z'));
       });
       it('ISO 8601 no time zone Z', () => {
         type = new DateTypeImp('2018-03-23T16:02:15');
-        expect(type.value).toEqual('2018-03-23T16:02:15.000Z');
+        expect(type.value).toEqual(new Date('2018-03-23T16:02:15.000Z'));
       });
       it('ISO 8601 no time zone T and Z', () => {
         type = new DateTypeImp('2018-03-23 16:02:15');
-        expect(type.value).toEqual('2018-03-23T16:02:15.000Z');
+        expect(type.value).toEqual(new Date('2018-03-23T16:02:15.000Z'));
       });
       it('ISO 8601 no time zone T and Z zero time', () => {
         type = new DateTypeImp('2018-03-23 00:00:00');
-        expect(type.value).toEqual('2018-03-23T00:00:00.000Z');
+        expect(type.value).toEqual(new Date('2018-03-23T00:00:00.000Z'));
+      });
+    });
+    describe('set valid Date date', () => {
+      it('ISO 8601 complete', () => {
+        type = new DateTypeImp(new Date('2018-03-23T16:02:15.000Z'));
+        expect(type.value).toEqual(new Date('2018-03-23T16:02:15.000Z'));
+      });
+      it('ISO 8601 partial', () => {
+        type = new DateTypeImp(new Date('2018-03-23'));
+        expect(type.value).toEqual(new Date('2018-03-23T00:00:00.000Z'));
+      });
+      it('ISO 8601 no time zone T', () => {
+        type = new DateTypeImp(new Date('2018-03-23 16:02:15.000Z'));
+        expect(type.value).toEqual(new Date('2018-03-23T16:02:15.000Z'));
+      });
+
+      it('Now', () => {
+        const today = new Date();
+        type = new DateTypeImp(today);
+        expect(type.value).toEqual(today);
       });
     });
     describe('null', () => {
