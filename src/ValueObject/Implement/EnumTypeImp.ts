@@ -1,8 +1,8 @@
 import { EnumType } from '../EnumType';
 
 enum StatusString {
-  UP = 'UP',
-  DOWN = 'DOWN',
+  UP = 'up',
+  DOWN = 'down',
 }
 
 export class EnumTypeImp extends EnumType<string> {
@@ -11,7 +11,9 @@ export class EnumTypeImp extends EnumType<string> {
     return this._enum;
   }
 
-  protected enumValues(): string[] {
-    return Object.keys(StatusString);
+  public validValue(value: string): boolean {
+    return Object.keys(StatusString)
+      .map((e) => StatusString[e])
+      .includes(value);
   }
 }

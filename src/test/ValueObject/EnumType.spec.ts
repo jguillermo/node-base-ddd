@@ -5,14 +5,14 @@ describe('Enum Type', () => {
   let type: EnumTypeImp;
   describe('constructorset values', () => {
     describe('set valid choise', () => {
-      it('UP', () => {
-        type = new EnumTypeImp('UP');
-        expect(type.value).toEqual('UP');
+      it('up', () => {
+        type = new EnumTypeImp('up');
+        expect(type.value).toEqual('up');
         expect(type.value).toEqual(type.enum.UP);
       });
-      it('DOWN', () => {
-        type = new EnumTypeImp('DOWN');
-        expect(type.value).toEqual('DOWN');
+      it('down', () => {
+        type = new EnumTypeImp('down');
+        expect(type.value).toEqual('down');
         expect(type.value).toEqual(type.enum.DOWN);
       });
     });
@@ -93,7 +93,7 @@ describe('Enum Type', () => {
       expect(type.isNull).toEqual(true);
     });
     it('not null ', () => {
-      type = new EnumTypeImp('UP');
+      type = new EnumTypeImp('up');
       expect(type.isNull).toEqual(false);
     });
     it('undefined', () => {
@@ -104,8 +104,8 @@ describe('Enum Type', () => {
 
   describe('toString', () => {
     it('Empty string', () => {
-      type = new EnumTypeImp('UP');
-      expect(type.toString).toEqual('UP');
+      type = new EnumTypeImp('up');
+      expect(type.toString).toEqual('up');
     });
     it('no param', () => {
       type = new EnumTypeImp();

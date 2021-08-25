@@ -8,7 +8,7 @@ export abstract class EnumType<T> extends BaseType<T> {
     return `${this.value}`;
   }
 
-  protected abstract enumValues(): T[];
+  public abstract validValue(value: T): boolean;
 
   protected abstract get enum();
 
@@ -16,7 +16,7 @@ export abstract class EnumType<T> extends BaseType<T> {
     if (value === null) {
       return null;
     }
-    if (!this.enumValues().includes(value)) {
+    if (!this.validValue(value)) {
       throw new Error(`value ${value} is not in Enum.`);
     }
     return value;
