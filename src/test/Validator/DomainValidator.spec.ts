@@ -1,6 +1,7 @@
 import { Validate, validate } from 'class-validator';
 import { DomainValidator } from '../../Validator/DomainValidator';
 import { StringType } from '../../ValueObject/StringType';
+import { ValidatorInterface } from '../../Validator/ValidatorInterface';
 
 class PropertieValidateTest extends StringType {
   isValid(): boolean {
@@ -22,31 +23,70 @@ class EntityValidateTest {
   id: string;
 }
 
+export class CompanyAddress implements ValidatorInterface {
+  constructor(private _number: string, private _street: string) {}
+
+  static create(data: any) {
+    return new CompanyAddress(data?.number, data?.street);
+  }
+
+  isValid(): boolean {
+    return true;
+  }
+
+  validatorMessage(): string {
+    return 'value ($value) is not valid.';
+  }
+}
+
+class CompanyAddressCreateInput {
+  street: string;
+  number: string;
+}
+
+export class CompanyPersistDto {
+  @Validate(DomainValidator, [CompanyAddress])
+  address: CompanyAddressCreateInput;
+}
+
 describe('validate DomainValidator PropertieValidateTest', () => {
-  it('null', async () => {
-    const object = new EntityValidateTest();
-    const errors = await validate(object);
-    expect(errors.length).toEqual(1);
-    expect(errors[0].constraints).toEqual({ domainValidator: 'id: not null' });
+  describe('primitive properties', () => {
+    it('null', async () => {
+      const object = new EntityValidateTest();
+      const errors = await validate(object);
+      expect(errors.length).toEqual(1);
+      expect(errors[0].constraints).toEqual({ domainValidator: 'id: not null' });
+    });
+    it('invalid value 123', async () => {
+      const object = new EntityValidateTest();
+      object.id = '123';
+      const errors = await validate(object);
+      expect(errors.length).toEqual(1);
+      expect(errors[0].constraints).toEqual({ domainValidator: 'id: not value 123' });
+    });
+    it('valid value', async () => {
+      const object = new EntityValidateTest();
+      object.id = 'valid value';
+      const errors = await validate(object);
+      expect(errors.length).toEqual(0);
+    });
+    it('invalid value default message error', async () => {
+      const object = new EntityValidateTest();
+      object.id = '789';
+      const errors = await validate(object);
+      expect(errors.length).toEqual(1);
+      expect(errors[0].constraints).toEqual({ domainValidator: 'id: value (789) is not valid.' });
+    });
   });
-  it('invalid value 123', async () => {
-    const object = new EntityValidateTest();
-    object.id = '123';
-    const errors = await validate(object);
-    expect(errors.length).toEqual(1);
-    expect(errors[0].constraints).toEqual({ domainValidator: 'id: not value 123' });
-  });
-  it('valid value', async () => {
-    const object = new EntityValidateTest();
-    object.id = 'valid value';
-    const errors = await validate(object);
-    expect(errors.length).toEqual(0);
-  });
-  it('invalid value default message error', async () => {
-    const object = new EntityValidateTest();
-    object.id = '789';
-    const errors = await validate(object);
-    expect(errors.length).toEqual(1);
-    expect(errors[0].constraints).toEqual({ domainValidator: 'id: value (789) is not valid.' });
+  describe('class embebed', () => {
+    it('address vo', async () => {
+      const object = new CompanyPersistDto();
+      object.address = {
+        number: '123',
+        street: '456',
+      };
+      const errors = await validate(object);
+      expect(errors.length).toEqual(0);
+    });
   });
 });
