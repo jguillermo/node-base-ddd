@@ -11,6 +11,8 @@ export class DomainValidator implements ValidatorConstraintInterface {
       vo = PaginatorTypeImp.create(value?.page, value?.perPage);
     } else if (objClass.name === OrderTypeImp.name) {
       vo = OrderTypeImp.create(value?.field, value?.direction);
+    } else if (typeof value === 'object') {
+      vo = objClass.create(value);
     } else {
       vo = new objClass(value);
     }
