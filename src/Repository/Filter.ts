@@ -14,5 +14,5 @@ export enum FilterOpStr {
 export interface FilterItem {
   field: string;
   opStr: FilterOpStr;
-  value: string;
+  value: string | number;
 }
