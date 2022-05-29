@@ -25,17 +25,17 @@ export class DateTypeImp extends DateType {}
 ```
 
 ### Number
-```jsx
+```js
 export class NumberTypeImp extends NumberType {}
 ```
 
 ### String
-```jsx
+```js
 export class StringTypeImp extends StringType {}
 ```
 
 ### Uuid
-```jsx
+```js
 export class UUIDTypeImp extends UUIDType {}
 ```
 
