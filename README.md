@@ -63,6 +63,5 @@ export class EnumTypeImp extends EnumType<string> {
       .includes(value);
   }
 }
-
 ```
 
