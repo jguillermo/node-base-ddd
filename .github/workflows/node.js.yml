@@ -3,37 +3,8 @@ name: Cli check
 on: push
 
 jobs:
-
-  load-cache:
+  test-lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.14.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: install dependencies
-        run:  make install
-
-      - name: Prints the current branch name
-        run: echo "${GITHUB_BRANCH}"
-        env:
-          GITHUB_BRANCH: ${{ github.ref }}
-  format:
-    runs-on: ubuntu-latest
-    needs: [ load-cache ]
     strategy:
       matrix:
         node-version: [18.14.x]
@@ -53,71 +24,22 @@ jobs:
           ${{ runner.os }}-node-
 
     - name: install dependencies
-      run:  make install
+      run:  npm ci
 
     - name: format
       run: make format
 
-
-  lint:
-    runs-on: ubuntu-latest
-    needs: [ load-cache ]
-    strategy:
-      matrix:
-        node-version: [18.14.x]
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Cache node modules
-      uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-
-    - name: install dependencies
-      run:  make install
-
     - name: lint
       run: make lint
-
-  test-unit-cov:
-    runs-on: ${{ matrix.os }}
-    needs: [ format, lint ]
-    strategy:
-      matrix:
-        node-version: [16.x, 18.14.x]
-        os: [ ubuntu-latest ]
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Cache node modules
-      uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-
-    - name: install dependencies
-      run:  make install
 
     - name: unit testing
       run: make test-unit-cov
 
+
   publish:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/master' }}
-    needs: [ test-unit-cov ]
+    needs: [ test-lint ]
     strategy:
       matrix:
         node-version: [18.14.x]
