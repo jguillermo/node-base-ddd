@@ -3,24 +3,17 @@ import { expectTypeOf } from 'expect-type';
 import { BooleanType, DateType, EnumType, IdType, NumberType, StringType, UuidType } from '../type';
 
 enum EnumCourseStatus {
-  'created' = 'created',
-  'deleted' = 'deleted',
+  'CREATED' = 'created',
+  'DELETED' = 'deleted',
 }
 
 export class CourseActive extends BooleanType {}
 
 export class CourseCreated extends DateType {}
 
-export class CourseStatus extends EnumType<string> {
-  protected _enum = EnumCourseStatus;
-  get enum() {
-    return this._enum;
-  }
-
-  public validValue(value: string): boolean {
-    return Object.keys(EnumCourseStatus)
-      .map((e) => EnumCourseStatus[e])
-      .includes(value);
+export class CourseStatus extends EnumType<EnumCourseStatus> {
+  constructor(value: keyof typeof EnumCourseStatus | null | undefined = null) {
+    super(EnumType.create<EnumCourseStatus>(value, Object.values(EnumCourseStatus)));
   }
 }
 
@@ -50,7 +43,7 @@ describe('Primitives', () => {
     type expectedPrimitives = {
       readonly courseActive: boolean | null;
       readonly courseCreated: Date | null;
-      readonly courseStatus: string | null;
+      readonly courseStatus: EnumCourseStatus | null;
       readonly courseId: string | null;
       readonly courseDuration: number | null;
       readonly courseName: string | null;
