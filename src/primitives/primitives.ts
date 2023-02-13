@@ -7,7 +7,7 @@ type MethodsAndProperties<T> = { [key in keyof T]: T[key] };
 
 type Properties<T> = Omit<MethodsAndProperties<T>, Methods<T>>;
 
-type PrimitiveTypes = string | number | boolean | Date | undefined | null;
+export type PrimitiveTypes = string | number | boolean | Date | undefined | null;
 
 type ValueObjectValue<T> = T extends PrimitiveTypes
   ? T

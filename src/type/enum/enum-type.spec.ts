@@ -6,16 +6,9 @@ enum StatusString {
   DOWN = 'down',
 }
 
-export class EnumTypeImp extends EnumType<string> {
-  protected _enum = StatusString;
-  get enum() {
-    return this._enum;
-  }
-
-  public validValue(value: string): boolean {
-    return Object.keys(StatusString)
-      .map((e) => StatusString[e])
-      .includes(value);
+export class EnumTypeImp extends EnumType<StatusString> {
+  constructor(value: keyof typeof StatusString | null | undefined = null) {
+    super(EnumType.create<StatusString>(value, Object.values(StatusString)));
   }
 }
 
@@ -24,14 +17,14 @@ describe('Enum Type', () => {
   describe('constructorset values', () => {
     describe('set valid choise', () => {
       it('up', () => {
-        type = new EnumTypeImp('up');
+        type = new EnumTypeImp(ValueGenerator.valueString('up'));
         expect(type.value).toEqual('up');
-        expect(type.value).toEqual(type.enum.UP);
+        expect(type.value).toEqual(StatusString.UP);
       });
       it('down', () => {
-        type = new EnumTypeImp('down');
+        type = new EnumTypeImp(ValueGenerator.valueString('down'));
         expect(type.value).toEqual('down');
-        expect(type.value).toEqual(type.enum.DOWN);
+        expect(type.value).toEqual(StatusString.DOWN);
       });
     });
     describe('null', () => {
@@ -50,12 +43,12 @@ describe('Enum Type', () => {
       describe('choises', () => {
         it('OTHER', () => {
           expect(() => {
-            new EnumTypeImp('OTHER');
+            new EnumTypeImp(ValueGenerator.valueString('OTHER'));
           }).toThrow('value OTHER is not in Enum.');
         });
         it('empty', () => {
           expect(() => {
-            new EnumTypeImp('');
+            new EnumTypeImp(ValueGenerator.valueString(''));
           }).toThrow(`value  is not in Enum.`);
         });
       });
@@ -111,7 +104,7 @@ describe('Enum Type', () => {
       expect(type.isNull).toEqual(true);
     });
     it('not null ', () => {
-      type = new EnumTypeImp('up');
+      type = new EnumTypeImp(ValueGenerator.valueString('up'));
       expect(type.isNull).toEqual(false);
     });
     it('undefined', () => {
@@ -122,7 +115,7 @@ describe('Enum Type', () => {
 
   describe('toString', () => {
     it('Empty string', () => {
-      type = new EnumTypeImp('up');
+      type = new EnumTypeImp(ValueGenerator.valueString('up'));
       expect(type.toString).toEqual('up');
     });
     it('no param', () => {

@@ -1,6 +1,11 @@
 import { BaseType } from '../base';
+import { PrimitiveTypes } from '../../primitives/primitives';
 
 export abstract class EnumType<T> extends BaseType<T> {
+  constructor(value: T | null) {
+    super(value);
+  }
+
   get toString(): string {
     if (this.isNull) {
       return '';
@@ -8,17 +13,17 @@ export abstract class EnumType<T> extends BaseType<T> {
     return `${this.value}`;
   }
 
-  public abstract validValue(value: T): boolean;
+  protected filter(value: T | null): T | null {
+    return value;
+  }
 
-  protected abstract get enum();
-
-  protected filter(value: any): T | null {
+  static create<PT>(value: PrimitiveTypes | PT, entries: PrimitiveTypes[]): PT | null {
     if (value === null) {
       return null;
     }
-    if (!this.validValue(value)) {
+    if (entries.filter((v) => v === value).length === 0) {
       throw new Error(`value ${value} is not in Enum.`);
     }
-    return value;
+    return value as PT;
   }
 }
