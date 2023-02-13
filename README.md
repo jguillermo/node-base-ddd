@@ -50,20 +50,13 @@ export class IdTypeImp extends IdType {}
 ```jsx
 enum StatusString {
   UP = 'up',
-    DOWN = 'down',
+  DOWN = 'down',
 }
 
-export class EnumTypeImp extends EnumType<string> {
-  protected _enum = StatusString;
-  get enum() {
-    return this._enum;
-  }
-
-  public validValue(value: string): boolean {
-    return Object.keys(StatusString)
-      .map((e) => StatusString[e])
-      .includes(value);
-  }
+export class EnumTypeImp extends EnumType<StatusString> {
+  constructor(value: keyof typeof StatusString | null | undefined = null) {
+  super(EnumType.create<StatusString>(value, Object.values(StatusString)));
+}
 }
 ```
 ## Tools
