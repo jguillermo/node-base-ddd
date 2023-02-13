@@ -13,8 +13,8 @@ build:
 lint:
 	npm run lint
 
-commit:
-	npm run commit
+co:
+	npm run co
 
 lint-fix:
 	npm run lint-fix

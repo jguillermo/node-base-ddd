@@ -35,8 +35,10 @@ export class StringTypeImp extends StringType {}
 ```
 
 ### Uuid
+
 ```js
-export class UUIDTypeImp extends UUIDType {}
+export class UuidTypeImp extends UuidType {
+}
 ```
 
 ### Id
@@ -64,4 +66,6 @@ export class EnumTypeImp extends EnumType<string> {
   }
 }
 ```
+## Tools
+- https://github.com/conventional-changelog/commitlint
 
