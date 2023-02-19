@@ -60,6 +60,7 @@ class Course {
     readonly courseCode: CourseCode,
     readonly courseTags: CourseTags,
     readonly courseImage: CourseImage,
+    readonly coursePrice: CoursePrice,
   ) {}
 }
 
@@ -76,6 +77,7 @@ describe('Primitives', () => {
       readonly courseCode: string | null;
       readonly courseTags: string[] | null;
       readonly courseImage: string[] | null;
+      readonly coursePrice: number[] | null;
     };
     expectTypeOf<actualPrimitives>().toEqualTypeOf<expectedPrimitives>();
   });
