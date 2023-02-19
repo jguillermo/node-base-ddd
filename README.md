@@ -15,8 +15,10 @@ Estas clases asbtractas ayudan a modelar el negocio.
 - Enum
 
 ### Boolean
+
 ```jsx
-export class BooleanTypeImp extends BooleanType {}
+export class BooleanTypeImp extends ArrayType {
+}
 ```
 
 ### Date
@@ -55,8 +57,8 @@ enum StatusString {
 
 export class EnumTypeImp extends EnumType<StatusString> {
   constructor(value: keyof typeof StatusString | null | undefined = null) {
-  super(EnumType.create<StatusString>(value, Object.values(StatusString)));
-}
+    super(EnumType.create<StatusString>(value, Object.values(StatusString)));
+  }
 }
 ```
 ## Tools

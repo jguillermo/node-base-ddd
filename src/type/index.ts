@@ -8,3 +8,4 @@ export * from './string';
 export * from './uuid';
 export * from './order';
 export * from './paginator';
+export * from './array';

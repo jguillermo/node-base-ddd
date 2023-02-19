@@ -12,6 +12,10 @@ export class ValueGenerator {
   static valueNumber(value: number): any {
     return value;
   }
+
+  static array(value: Array<any>): any {
+    return value;
+  }
 }
 
 class TestBaseType extends BaseType<string> {

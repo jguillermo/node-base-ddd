@@ -1,6 +1,16 @@
 import { Primitives } from './primitives';
 import { expectTypeOf } from 'expect-type';
-import { BooleanType, DateType, EnumType, IdType, NumberType, StringType, UuidType } from '../type';
+import {
+  ArrayType,
+  ArrayTypeString,
+  BooleanType,
+  DateType,
+  EnumType,
+  IdType,
+  NumberType,
+  StringType,
+  UuidType,
+} from '../type';
 
 enum EnumCourseStatus {
   'CREATED' = 'created',
@@ -25,6 +35,20 @@ export class CourseName extends StringType {}
 
 export class CourseCode extends UuidType {}
 
+export class CourseTags extends ArrayTypeString {}
+
+export class CourseImage extends ArrayType<string> {
+  protected itemValidator(item: any): boolean {
+    return true;
+  }
+}
+
+export class CoursePrice extends ArrayType<number> {
+  protected itemValidator(item: any): boolean {
+    return true;
+  }
+}
+
 class Course {
   constructor(
     readonly courseId: CourseId,
@@ -34,6 +58,9 @@ class Course {
     readonly courseStatus: CourseStatus,
     readonly courseDuration: CourseDuration,
     readonly courseCode: CourseCode,
+    readonly courseTags: CourseTags,
+    readonly courseImage: CourseImage,
+    readonly coursePrice: CoursePrice,
   ) {}
 }
 
@@ -48,6 +75,9 @@ describe('Primitives', () => {
       readonly courseDuration: number | null;
       readonly courseName: string | null;
       readonly courseCode: string | null;
+      readonly courseTags: string[] | null;
+      readonly courseImage: string[] | null;
+      readonly coursePrice: number[] | null;
     };
     expectTypeOf<actualPrimitives>().toEqualTypeOf<expectedPrimitives>();
   });
