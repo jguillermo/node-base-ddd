@@ -29,6 +29,8 @@ export class CourseStatus extends EnumType<EnumCourseStatus> {
 
 export class CourseId extends IdType {}
 
+export class customerId extends IdType {}
+
 export class CourseDuration extends NumberType {}
 
 export class CourseName extends StringType {}
@@ -59,7 +61,6 @@ class Course {
     readonly courseDuration: CourseDuration,
     readonly courseCode: CourseCode,
     readonly courseTags: CourseTags,
-    readonly courseImage: CourseImage,
     readonly coursePrice: CoursePrice,
   ) {}
 }
@@ -67,16 +68,16 @@ class Course {
 describe('Primitives', () => {
   it('should ensure to only return primitive properties excluding methods', () => {
     type actualPrimitives = Primitives<Course>;
+    // type actualPrimitives
     type expectedPrimitives = {
-      readonly courseActive: boolean | null;
-      readonly courseCreated: Date | null;
-      readonly courseStatus: EnumCourseStatus | null;
       readonly courseId: string | null;
-      readonly courseDuration: number | null;
       readonly courseName: string | null;
+      readonly courseCreated: Date | null;
+      readonly courseActive: boolean | null;
+      readonly courseStatus: EnumCourseStatus | null;
+      readonly courseDuration: number | null;
       readonly courseCode: string | null;
       readonly courseTags: string[] | null;
-      readonly courseImage: string[] | null;
       readonly coursePrice: number[] | null;
     };
     expectTypeOf<actualPrimitives>().toEqualTypeOf<expectedPrimitives>();
