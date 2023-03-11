@@ -41,13 +41,13 @@ export class CourseTags extends ArrayTypeString {}
 
 export class CourseImage extends ArrayType<string> {
   protected itemValidator(item: any): boolean {
-    return true;
+    return !!item;
   }
 }
 
 export class CoursePrice extends ArrayType<number> {
   protected itemValidator(item: any): boolean {
-    return true;
+    return !!item;
   }
 }
 

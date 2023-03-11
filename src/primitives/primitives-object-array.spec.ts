@@ -6,7 +6,7 @@ export class customerId extends IdType {}
 
 export class CourseCustomers extends ArrayType<customerId> {
   protected itemValidator(item: any): boolean {
-    return true;
+    return !!item;
   }
 }
 
@@ -17,9 +17,8 @@ class Course {
 describe('Primitives', () => {
   it('should ensure to only return primitive properties excluding methods', () => {
     type actualPrimitives = Primitives<Course>;
-    // type actualPrimitives
     type expectedPrimitives = {
-      readonly courseCustomers: string[] | null;
+      readonly courseCustomers: (string | null)[] | null;
     };
     expectTypeOf<actualPrimitives>().toEqualTypeOf<expectedPrimitives>();
   });
