@@ -1,5 +1,6 @@
 import { EventBase } from '../event';
 import { Primitives } from '../primitives/primitives';
+import { plainToInstance } from 'class-transformer';
 
 export abstract class AggregateRoot<A> {
   private domainEvents: EventBase[] = [];
@@ -15,8 +16,7 @@ export abstract class AggregateRoot<A> {
   }
 
   protected recordBy(eventClass: any) {
-    const event = new eventClass();
-    event.id = this.toPrimitives()['id'];
+    const event = plainToInstance(eventClass, this.toPrimitives()) as EventBase;
     this.domainEvents.push(event);
   }
 
