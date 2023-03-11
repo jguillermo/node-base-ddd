@@ -95,11 +95,6 @@ describe('String Type', () => {
             new DateTypeImp('2018-03-23T15:02:61.000Z');
           }).toThrow(`date is not valid.`);
         });
-        it.skip('only time', () => {
-          expect(() => {
-            new DateTypeImp('15:02:61');
-          }).toThrow(`date is not valid.`);
-        });
       });
       describe('string', () => {
         it('Empty', () => {
