@@ -1,4 +1,4 @@
-import { PrimitivesTypes } from './primitives-types';
+import { PrimitiveAggregate } from './primitive-aggregate';
 import { expectTypeOf } from 'expect-type';
 import { ArrayType, IdType } from '../../type';
 
@@ -16,7 +16,7 @@ class Course {
 
 describe('Primitives', () => {
   it('should ensure to only return primitive properties excluding methods', () => {
-    type actualPrimitives = PrimitivesTypes<Course>;
+    type actualPrimitives = PrimitiveAggregate<Course>;
     type expectedPrimitives = {
       readonly courseCustomers: (string | null)[] | null;
     };

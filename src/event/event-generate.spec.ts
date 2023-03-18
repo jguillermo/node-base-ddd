@@ -10,7 +10,7 @@ import {
   UuidType,
 } from '../type';
 import { AggregateRoot } from '../aggregate';
-import { PrimitivesTypes } from '../primitives/types/primitives-types';
+import { PrimitiveAggregate } from '../primitives/types/primitive-aggregate';
 import { EventBase } from './event-base';
 
 enum EnumCourseStatus {
@@ -62,7 +62,7 @@ class Course extends AggregateRoot<Course> {
     super();
   }
 
-  static fromPrimitives(values: PrimitivesTypes<Course>): Course {
+  static fromPrimitives(values: PrimitiveAggregate<Course>): Course {
     return new Course(
       new CourseId(values.id),
       new CourseName(values.name),
@@ -77,7 +77,7 @@ class Course extends AggregateRoot<Course> {
     );
   }
 
-  toPrimitives(): PrimitivesTypes<Course> {
+  toPrimitives(): PrimitiveAggregate<Course> {
     return {
       id: this.id.value,
       name: this.name.value,
