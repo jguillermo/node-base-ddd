@@ -1,5 +1,5 @@
-import { BaseType } from '../base';
 import validator from 'validator';
+import { AbstractType } from '../abstract-type';
 import isEmptyValidator = validator.isEmpty;
 import isLengthValidator = validator.isLength;
 
@@ -9,7 +9,7 @@ export interface StringIsLengthValidator {
   exactly?: number;
 }
 
-export abstract class StringType extends BaseType<string> {
+export abstract class StringType extends AbstractType<string> {
   get isEmpty(): boolean {
     if (this.isNull) {
       return true;

@@ -1,7 +1,7 @@
-import { BaseType } from '../base';
 import { isArray } from 'class-validator';
+import { AbstractType } from '../abstract-type';
 
-export abstract class ArrayType<T> extends BaseType<Array<T>> {
+export abstract class ArrayType<T> extends AbstractType<Array<T>> {
   get toString(): string {
     return this.value ? this.value.toString() : '';
   }

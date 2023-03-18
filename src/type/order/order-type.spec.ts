@@ -1,4 +1,4 @@
-import { ValueGenerator } from '../base/base-type.spec';
+import { ValueGenerator } from '../abstract-type.spec';
 import { OrderTypeImp } from './';
 import { validate, Validate } from 'class-validator';
 import { DomainValidator } from '../../validator';

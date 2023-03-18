@@ -1,5 +1,5 @@
 import { EnumType } from './';
-import { ValueGenerator } from '../base/base-type.spec';
+import { ValueGenerator } from '../abstract-type.spec';
 
 enum StatusString {
   UP = 'up',

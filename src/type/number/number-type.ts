@@ -1,6 +1,6 @@
-import { BaseType } from '../base';
+import { AbstractType } from '../abstract-type';
 
-export abstract class NumberType extends BaseType<number> {
+export abstract class NumberType extends AbstractType<number> {
   get toString(): string {
     if (this.isNull) {
       return '';

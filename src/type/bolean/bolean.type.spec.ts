@@ -1,4 +1,4 @@
-import { ValueGenerator } from '../base/base-type.spec';
+import { ValueGenerator } from '../abstract-type.spec';
 import { BooleanTypeImp } from './';
 
 describe('String Type', () => {

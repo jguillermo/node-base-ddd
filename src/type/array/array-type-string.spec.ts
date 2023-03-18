@@ -1,4 +1,4 @@
-import { ValueGenerator } from '../base/base-type.spec';
+import { ValueGenerator } from '../abstract-type.spec';
 import { ArrayTypeString } from './array-type-string';
 
 describe('Array Type String', () => {

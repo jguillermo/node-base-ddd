@@ -1,10 +1,10 @@
 import * as dayjs from 'dayjs';
 import * as utc from 'dayjs/plugin/utc';
-import { BaseType } from '../base';
+import { AbstractType } from '../abstract-type';
 
 dayjs.extend(utc);
 
-export abstract class DateType extends BaseType<Date> {
+export abstract class DateType extends AbstractType<Date> {
   constructor(value: any = null) {
     super(value);
   }
