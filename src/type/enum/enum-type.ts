@@ -1,5 +1,5 @@
 import { AbstractType } from '../abstract-type';
-import { PrimitiveTypes } from '../../primitives/primitives';
+import { PrimitiveTypes } from '../../primitives/types/primitives-types';
 
 export abstract class EnumType<T> extends AbstractType<T> {
   constructor(value: T | null) {

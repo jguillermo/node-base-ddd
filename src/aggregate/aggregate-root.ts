@@ -1,5 +1,5 @@
 import { EventBase } from '../event';
-import { Primitives } from '../primitives/primitives';
+import { PrimitivesTypes } from '../primitives/types/primitives-types';
 import { plainToInstance } from 'class-transformer';
 
 export abstract class AggregateRoot<A> {
@@ -20,7 +20,7 @@ export abstract class AggregateRoot<A> {
     this.domainEvents.push(event);
   }
 
-  abstract toPrimitives(): Primitives<A>;
+  abstract toPrimitives(): PrimitivesTypes<A>;
 
   //abstract fromPrimitives(values: Primitives<A>): A;
 }

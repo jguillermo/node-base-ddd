@@ -1,6 +1,6 @@
-import { Primitives } from './primitives';
+import { PrimitivesTypes } from './primitives-types';
 import { expectTypeOf } from 'expect-type';
-import { ArrayType, IdType } from '../type';
+import { ArrayType, IdType } from '../../type';
 
 export class customerId extends IdType {}
 
@@ -16,7 +16,7 @@ class Course {
 
 describe('Primitives', () => {
   it('should ensure to only return primitive properties excluding methods', () => {
-    type actualPrimitives = Primitives<Course>;
+    type actualPrimitives = PrimitivesTypes<Course>;
     type expectedPrimitives = {
       readonly courseCustomers: (string | null)[] | null;
     };

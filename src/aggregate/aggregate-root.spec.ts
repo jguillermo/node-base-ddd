@@ -1,6 +1,6 @@
 import { AggregateRoot } from './';
 import { EventBase } from '../event';
-import { Primitives } from '../primitives/primitives';
+import { PrimitivesTypes } from '../primitives/types/primitives-types';
 
 class TestEventBase extends EventBase {
   eventName(): string {
@@ -9,11 +9,11 @@ class TestEventBase extends EventBase {
 }
 
 class TestAggregateRoot extends AggregateRoot<TestAggregateRoot> {
-  fromPrimitives(values: Primitives<TestAggregateRoot>): TestAggregateRoot {
+  fromPrimitives(values: PrimitivesTypes<TestAggregateRoot>): TestAggregateRoot {
     return new TestAggregateRoot();
   }
 
-  toPrimitives(): Primitives<TestAggregateRoot> {
+  toPrimitives(): PrimitivesTypes<TestAggregateRoot> {
     return {};
   }
 

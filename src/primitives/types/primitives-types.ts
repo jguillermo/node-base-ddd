@@ -21,6 +21,6 @@ export type ValueObjectValue<T> = T extends PrimitiveTypes
   ? { [K in keyof Properties<T>]: ValueObjectValue<U> }
   : never;
 
-export type Primitives<T> = {
+export type PrimitivesTypes<T> = {
   [key in keyof Properties<T>]: ValueObjectValue<T[key]>;
 };

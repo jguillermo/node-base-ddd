@@ -1,4 +1,4 @@
-import { Primitives } from './primitives';
+import { PrimitivesTypes } from './primitives-types';
 import { expectTypeOf } from 'expect-type';
 import {
   ArrayType,
@@ -10,7 +10,7 @@ import {
   NumberType,
   StringType,
   UuidType,
-} from '../type';
+} from '../../type';
 
 enum EnumCourseStatus {
   'CREATED' = 'created',
@@ -67,7 +67,7 @@ class Course {
 
 describe('Primitives', () => {
   it('should ensure to only return primitive properties excluding methods', () => {
-    type actualPrimitives = Primitives<Course>;
+    type actualPrimitives = PrimitivesTypes<Course>;
     // type actualPrimitives
     type expectedPrimitives = {
       readonly courseId: string | null;
