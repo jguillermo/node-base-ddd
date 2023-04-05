@@ -9,10 +9,10 @@ type Properties<T> = Omit<MethodsAndProperties<T>, Methods<T>>;
 
 export type PrimitiveTypes = string | number | boolean | Date | undefined | null;
 
-type ValueObjectValue<T> = T extends PrimitiveTypes
+export type ValueObjectValue<T> = T extends PrimitiveTypes
   ? T
   : T extends { value: infer U }
-  ? U
+  ? ValueObjectValue<U>
   : T extends Array<{ value: infer U }>
   ? U[]
   : T extends Array<infer U>
@@ -21,6 +21,6 @@ type ValueObjectValue<T> = T extends PrimitiveTypes
   ? { [K in keyof Properties<T>]: ValueObjectValue<U> }
   : never;
 
-export type Primitives<T> = {
+export type PrimitiveAggregate<T> = {
   [key in keyof Properties<T>]: ValueObjectValue<T[key]>;
 };

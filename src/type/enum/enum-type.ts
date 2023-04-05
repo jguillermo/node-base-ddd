@@ -1,7 +1,7 @@
-import { BaseType } from '../base';
-import { PrimitiveTypes } from '../../primitives/primitives';
+import { AbstractType } from '../abstract-type';
+import { PrimitiveTypes } from '../../primitives/types/primitive-aggregate';
 
-export abstract class EnumType<T> extends BaseType<T> {
+export abstract class EnumType<T> extends AbstractType<T> {
   constructor(value: T | null) {
     super(value);
   }

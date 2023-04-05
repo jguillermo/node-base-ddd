@@ -1,11 +1,9 @@
-import { v4 as uuidv4 } from 'uuid';
-import { validate as uuidValidate } from 'uuid';
-import { v5 as uuidv5 } from 'uuid';
-import { BaseType } from '../base';
+import { v4 as uuidv4, v5 as uuidv5, validate as uuidValidate } from 'uuid';
+import { AbstractType } from '../abstract-type';
 
 const DNS_NAMESPACE = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
 
-export abstract class UuidType extends BaseType<string> {
+export abstract class UuidType extends AbstractType<string> {
   static random(): string {
     return uuidv4();
   }

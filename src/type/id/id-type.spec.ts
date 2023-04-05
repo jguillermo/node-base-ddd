@@ -1,4 +1,4 @@
-import { ValueGenerator } from '../base/base-type.spec';
+import { ValueGenerator } from '../abstract-type.spec';
 import { IdTypeImp } from './';
 
 const UUID_4_VALUE = 'df9ef000-21fc-4e06-b8f7-103c3a133d10';

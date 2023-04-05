@@ -1,79 +1,74 @@
 import { ValueGenerator } from '../abstract-type.spec';
-import { ArrayTypeString } from './array-type-string';
+import { ArrayTypeNumber } from './array-type-number';
 
-describe('Array Type String', () => {
-  let type: ArrayTypeString;
+describe('Array Type Number', () => {
+  let type: ArrayTypeNumber;
   describe('constructor set values', () => {
     describe('valid value', () => {
-      it('["a","b"]', () => {
-        type = new ArrayTypeString(['a', 'b']);
-        expect(type.value).toEqual(['a', 'b']);
+      it('[1, 1,2]', () => {
+        type = new ArrayTypeNumber([1, 1.2]);
+        expect(type.value).toEqual([1, 1.2]);
       });
     });
     describe('null value', () => {
       it('null', () => {
-        type = new ArrayTypeString();
+        type = new ArrayTypeNumber();
         expect(type.value).toEqual(null);
       });
     });
     describe('undefined', () => {
       it('undefined equals null', () => {
-        type = new ArrayTypeString(undefined);
+        type = new ArrayTypeNumber(undefined);
         expect(type.value).toEqual(null);
       });
     });
     describe('set invalid value', () => {
       it('string', () => {
         expect(() => {
-          new ArrayTypeString(ValueGenerator.array([1]));
-        }).toThrow('1 is not valid value in array.');
+          new ArrayTypeNumber(ValueGenerator.array(['a']));
+        }).toThrow('a is not valid value in array.');
       });
 
       it('string', () => {
         expect(() => {
-          new ArrayTypeString(ValueGenerator.valueString('a'));
+          new ArrayTypeNumber(ValueGenerator.valueString('a'));
         }).toThrow('value a is not a Array.');
-      });
-      it('number', () => {
-        expect(() => {
-          new ArrayTypeString(ValueGenerator.valueNumber(10));
-        }).toThrow('value 10 is not a Array.');
       });
     });
   });
   describe('isNull', () => {
     it('null', () => {
-      type = new ArrayTypeString();
+      type = new ArrayTypeNumber();
       expect(type.isNull).toEqual(true);
     });
     it('not null ', () => {
-      type = new ArrayTypeString(['a']);
+      type = new ArrayTypeNumber([1]);
       expect(type.isNull).toEqual(false);
 
-      type = new ArrayTypeString([]);
+      type = new ArrayTypeNumber([]);
       expect(type.isNull).toEqual(false);
     });
     it('undefined', () => {
-      type = new ArrayTypeString(undefined);
+      type = new ArrayTypeNumber(undefined);
       expect(type.isNull).toEqual(true);
     });
   });
   describe('toString', () => {
     describe('valid value', () => {
       it('true', () => {
-        type = new ArrayTypeString(['a', 'b']);
-        expect(type.toString).toEqual('a,b');
+        type = new ArrayTypeNumber([1, 2]);
+        expect(type.toString).toEqual('1,2');
       });
     });
     describe('null value', () => {
       it('null', () => {
-        type = new ArrayTypeString();
+        type = new ArrayTypeNumber();
         expect(type.toString).toEqual('');
       });
     });
     describe('undefined', () => {
       it('undefined equals null', () => {
-        type = new ArrayTypeString(undefined);
+        type = new ArrayTypeNumber(undefined);
         expect(type.toString).toEqual('');
       });
     });

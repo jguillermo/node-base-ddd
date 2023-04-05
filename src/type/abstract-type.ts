@@ -1,6 +1,6 @@
-import { ValidatorInterface } from '../../validator';
+import { ValidatorInterface } from '../validator';
 
-export abstract class BaseType<T> implements ValidatorInterface {
+export abstract class AbstractType<T> implements ValidatorInterface {
   protected _value: T | null;
 
   constructor(value: T | null = null) {

@@ -1,4 +1,3 @@
-export * from './base';
 export * from './bolean';
 export * from './date';
 export * from './enum';
