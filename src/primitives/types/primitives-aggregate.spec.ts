@@ -1,84 +1,56 @@
 import { PrimitiveAggregate } from './primitive-aggregate';
 import { expectTypeOf } from 'expect-type';
 import {
-  ArrayType,
   ArrayTypeString,
-  BooleanType,
-  DateType,
+  BooleanTypeImp,
+  DateTypeImp,
   EnumType,
-  IdType,
-  NumberType,
-  StringType,
-  UuidType,
+  IdTypeImp,
+  NumberTypeImp,
+  StringTypeImp,
+  UuidTypeImp,
 } from '../../type';
+import { ArrayTypeNumber } from '../../type/array/array-type-number';
 
-enum EnumCourseStatus {
+enum AggregateEnumValues {
   'CREATED' = 'created',
   'DELETED' = 'deleted',
 }
 
-export class CourseActive extends BooleanType {}
-
-export class CourseCreated extends DateType {}
-
-export class CourseStatus extends EnumType<EnumCourseStatus> {
-  constructor(value: keyof typeof EnumCourseStatus | null | undefined = null) {
-    super(EnumType.create<EnumCourseStatus>(value, Object.values(EnumCourseStatus)));
+export class AggregateEnum extends EnumType<AggregateEnumValues> {
+  constructor(value: keyof typeof AggregateEnumValues | null | undefined = null) {
+    super(EnumType.create<AggregateEnumValues>(value, Object.values(AggregateEnumValues)));
   }
 }
 
-export class CourseId extends IdType {}
-
-export class customerId extends IdType {}
-
-export class CourseDuration extends NumberType {}
-
-export class CourseName extends StringType {}
-
-export class CourseCode extends UuidType {}
-
-export class CourseTags extends ArrayTypeString {}
-
-export class CourseImage extends ArrayType<string> {
-  protected itemValidator(item: any): boolean {
-    return !!item;
-  }
-}
-
-export class CoursePrice extends ArrayType<number> {
-  protected itemValidator(item: any): boolean {
-    return !!item;
-  }
-}
-
-class Course {
+class Aggregate {
   constructor(
-    readonly courseId: CourseId,
-    readonly courseName: CourseName,
-    readonly courseCreated: CourseCreated,
-    readonly courseActive: CourseActive,
-    readonly courseStatus: CourseStatus,
-    readonly courseDuration: CourseDuration,
-    readonly courseCode: CourseCode,
-    readonly courseTags: CourseTags,
-    readonly coursePrice: CoursePrice,
+    readonly aggregateId: IdTypeImp,
+    readonly aggregateString: StringTypeImp,
+    readonly aggregateBoolean: BooleanTypeImp,
+    readonly aggregateDate: DateTypeImp,
+    readonly aggregateEnum: AggregateEnum,
+    readonly aggregateNumber: NumberTypeImp,
+    readonly aggregateUuid: UuidTypeImp,
+    readonly aggregateArrayString: ArrayTypeString,
+    readonly aggregateArrayNumber: ArrayTypeNumber,
   ) {}
 }
 
 describe('Primitives', () => {
   it('should ensure to only return primitive properties excluding methods', () => {
-    type actualPrimitives = PrimitiveAggregate<Course>;
+    type actualPrimitives = PrimitiveAggregate<Aggregate>;
     // type actualPrimitives
     type expectedPrimitives = {
-      readonly courseId: string | null;
-      readonly courseName: string | null;
-      readonly courseCreated: Date | null;
-      readonly courseActive: boolean | null;
-      readonly courseStatus: EnumCourseStatus | null;
-      readonly courseDuration: number | null;
-      readonly courseCode: string | null;
-      readonly courseTags: string[] | null;
-      readonly coursePrice: number[] | null;
+      readonly aggregateId: string | null;
+      readonly aggregateString: string | null;
+      readonly aggregateBoolean: boolean | null;
+      readonly aggregateDate: Date | null;
+      readonly aggregateEnum: AggregateEnumValues | null;
+      readonly aggregateNumber: number | null;
+      readonly aggregateUuid: string | null;
+      readonly aggregateArrayString: string[] | null;
+      readonly aggregateArrayNumber: number[] | null;
     };
     expectTypeOf<actualPrimitives>().toEqualTypeOf<expectedPrimitives>();
   });
