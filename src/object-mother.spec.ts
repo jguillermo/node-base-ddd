@@ -10,6 +10,7 @@ import {
   UuidTypeImp,
 } from './type';
 import { ArrayTypeNumber } from './type/array/array-type-number';
+import { AggregateRoot } from './aggregate';
 
 export enum AggregateEnumValues {
   'CREATED' = 'CREATED',
@@ -19,6 +20,15 @@ export enum AggregateEnumValues {
 export class AggregateEnumObjectMother extends EnumType<AggregateEnumValues> {
   constructor(value: keyof typeof AggregateEnumValues | null | undefined = null) {
     super(EnumType.create<AggregateEnumValues>(value, Object.values(AggregateEnumValues)));
+  }
+}
+
+export class AggregateObjectMotherId extends AggregateRoot {
+  readonly aggregateId: IdTypeImp;
+
+  constructor(aggregateId?: string) {
+    super();
+    this.aggregateId = new IdTypeImp(aggregateId ?? faker.datatype.uuid());
   }
 }
 
