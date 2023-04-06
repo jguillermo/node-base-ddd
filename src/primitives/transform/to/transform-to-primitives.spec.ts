@@ -14,7 +14,7 @@ export class CourseStatus extends EnumType<EnumCourseStatus> {
   }
 }
 
-class ClsStringType extends AggregateRoot<ClsStringType> {
+class ClsStringType extends AggregateRoot {
   readonly propertieString: StringType;
 
   toPrimitives(): PrimitiveAggregate<ClsStringType> {

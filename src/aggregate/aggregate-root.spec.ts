@@ -1,6 +1,5 @@
 import { AggregateRoot } from './';
 import { EventBase } from '../event';
-import { PrimitiveAggregate } from '../primitives/types/primitive-aggregate';
 
 class TestEventBase extends EventBase {
   eventName(): string {
@@ -8,15 +7,7 @@ class TestEventBase extends EventBase {
   }
 }
 
-class TestAggregateRoot extends AggregateRoot<TestAggregateRoot> {
-  fromPrimitives(values: PrimitiveAggregate<TestAggregateRoot>): TestAggregateRoot {
-    return new TestAggregateRoot();
-  }
-
-  toPrimitives(): PrimitiveAggregate<TestAggregateRoot> {
-    return {};
-  }
-
+class TestAggregateRoot extends AggregateRoot {
   static create() {
     const aggregate = new TestAggregateRoot();
     aggregate.record(new TestEventBase());
