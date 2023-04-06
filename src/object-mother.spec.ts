@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import {
   ArrayTypeString,
   BooleanTypeImp,
@@ -32,22 +33,32 @@ export class AggregateObjectMother {
   readonly aggregateArrayString: ArrayTypeString;
   readonly aggregateArrayNumber: ArrayTypeNumber;
 
-  constructor() {
-    this.aggregateId = new IdTypeImp('16673a29-ec81-461a-94dc-8af6391c4ebb');
-    this.aggregateString = new StringTypeImp('string');
-    this.aggregateBoolean = new BooleanTypeImp(true);
-    this.aggregateDate = new DateTypeImp(new Date());
-    this.aggregateEnum = new AggregateEnumObjectMother('CREATED');
-    this.aggregateNumber = new NumberTypeImp(1);
-    this.aggregateUuid = new UuidTypeImp('1e6c3dbe-e162-4bea-84f7-d56bb1c235b5');
-    this.aggregateArrayString = new ArrayTypeString(['string']);
-    this.aggregateArrayNumber = new ArrayTypeNumber([1]);
+  constructor(data?: {
+    aggregateId?: string;
+    aggregateString?: string;
+    aggregateBoolean?: boolean;
+    aggregateDate?: Date;
+    aggregateEnum?: AggregateEnumValues;
+    aggregateNumber?: number;
+    aggregateUuid?: string;
+    aggregateArrayString?: string[];
+    aggregateArrayNumber?: number[];
+  }) {
+    this.aggregateId = new IdTypeImp(data?.aggregateId ?? faker.datatype.uuid());
+    this.aggregateString = new StringTypeImp(data?.aggregateString ?? faker.datatype.string());
+    this.aggregateBoolean = new BooleanTypeImp(data?.aggregateBoolean ?? faker.datatype.boolean());
+    this.aggregateDate = new DateTypeImp(data?.aggregateDate ?? faker.datatype.datetime());
+    this.aggregateEnum = new AggregateEnumObjectMother(data?.aggregateEnum ?? 'CREATED');
+    this.aggregateNumber = new NumberTypeImp(data?.aggregateNumber ?? faker.datatype.number());
+    this.aggregateUuid = new UuidTypeImp(data?.aggregateUuid ?? faker.datatype.uuid());
+    this.aggregateArrayString = new ArrayTypeString(data?.aggregateArrayString ?? [faker.datatype.string()]);
+    this.aggregateArrayNumber = new ArrayTypeNumber(data?.aggregateArrayNumber ?? [faker.datatype.number()]);
   }
 }
 
 describe('AggregateObjectMother', () => {
   it('get set', () => {
-    const aggregate = new AggregateObjectMother();
+    const aggregate = new AggregateObjectMother({ aggregateString: 'string' });
     expect(aggregate.aggregateString.value).toEqual('string');
   });
 });

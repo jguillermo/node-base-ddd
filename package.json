@@ -50,6 +50,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
+    "@faker-js/faker": "^7.6.0",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.3",
     "@types/validator": "^13.7.14",
