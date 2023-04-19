@@ -140,7 +140,7 @@ export class AggregateObjectMotherArrayNumber extends AggregateRoot {
   }
 }
 
-export class AggregateObjectMother {
+export class AggregateObjectMother extends AggregateRoot {
   readonly aggregateId: IdTypeImp;
   readonly aggregateString: StringTypeImp;
   readonly aggregateBoolean: BooleanTypeImp;
@@ -162,6 +162,7 @@ export class AggregateObjectMother {
     aggregateArrayString?: string[];
     aggregateArrayNumber?: number[];
   }) {
+    super();
     this.aggregateId = new IdTypeImp(data?.aggregateId ?? faker.datatype.uuid());
     this.aggregateString = new StringTypeImp(data?.aggregateString ?? faker.datatype.string());
     this.aggregateBoolean = new BooleanTypeImp(data?.aggregateBoolean ?? faker.datatype.boolean());
@@ -171,6 +172,48 @@ export class AggregateObjectMother {
     this.aggregateEnum = new AggregateEnumObjectMother(data?.aggregateEnum ?? 'CREATED');
     this.aggregateArrayString = new ArrayTypeString(data?.aggregateArrayString ?? [faker.datatype.string()]);
     this.aggregateArrayNumber = new ArrayTypeNumber(data?.aggregateArrayNumber ?? [faker.datatype.number()]);
+  }
+}
+
+export class AggregateObjectMotherNull extends AggregateRoot {
+  readonly aggregateId: IdTypeImp;
+  readonly aggregateString: StringTypeImp;
+  readonly aggregateBoolean: BooleanTypeImp;
+  readonly aggregateDate: DateTypeImp;
+  readonly aggregateNumber: NumberTypeImp;
+  readonly aggregateUuid: UuidTypeImp;
+  readonly aggregateEnum: AggregateEnumObjectMother;
+  readonly aggregateArrayString: ArrayTypeString;
+  readonly aggregateArrayNumber: ArrayTypeNumber;
+
+  constructor() {
+    super();
+    this.aggregateId = new IdTypeImp(faker.datatype.uuid());
+    this.aggregateString = new StringTypeImp(null);
+    this.aggregateBoolean = new BooleanTypeImp(null);
+    this.aggregateDate = new DateTypeImp(null);
+    this.aggregateNumber = new NumberTypeImp(null);
+    this.aggregateUuid = new UuidTypeImp(null);
+    this.aggregateEnum = new AggregateEnumObjectMother(null);
+    this.aggregateArrayString = new ArrayTypeString(null);
+    this.aggregateArrayNumber = new ArrayTypeNumber(null);
+  }
+}
+
+export class AggregateObjectMotherNotInstance extends AggregateRoot {
+  readonly aggregateId: IdTypeImp;
+  readonly aggregateString: StringTypeImp;
+  readonly aggregateBoolean: BooleanTypeImp;
+  readonly aggregateDate: DateTypeImp;
+  readonly aggregateNumber: NumberTypeImp;
+  readonly aggregateUuid: UuidTypeImp;
+  readonly aggregateEnum: AggregateEnumObjectMother;
+  readonly aggregateArrayString: ArrayTypeString;
+  readonly aggregateArrayNumber: ArrayTypeNumber;
+
+  constructor() {
+    super();
+    this.aggregateId = new IdTypeImp(faker.datatype.uuid());
   }
 }
 

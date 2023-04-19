@@ -1,10 +1,13 @@
 import {
+  AggregateObjectMother,
   AggregateObjectMotherArrayNumber,
   AggregateObjectMotherArrayString,
   AggregateObjectMotherBoolean,
   AggregateObjectMotherDate,
   AggregateObjectMotherEnum,
   AggregateObjectMotherId,
+  AggregateObjectMotherNotInstance,
+  AggregateObjectMotherNull,
   AggregateObjectMotherNumber,
   AggregateObjectMotherString,
   AggregateObjectMotherUuid,
@@ -53,5 +56,50 @@ describe('Primitives to primitive', () => {
   it('ArrayNumber', () => {
     const aggregate = new AggregateObjectMotherArrayNumber();
     expect(toPrimitives(aggregate)).toEqual({ aggregateArrayNumber: aggregate.aggregateArrayNumber.value });
+  });
+  it('Aggregate', () => {
+    const aggregate = new AggregateObjectMother();
+    expect(toPrimitives(aggregate)).toEqual({
+      aggregateId: aggregate.aggregateId.value,
+      aggregateString: aggregate.aggregateString.value,
+      aggregateBoolean: aggregate.aggregateBoolean.value,
+      aggregateDate: aggregate.aggregateDate.value,
+      aggregateNumber: aggregate.aggregateNumber.value,
+      aggregateUuid: aggregate.aggregateUuid.value,
+      aggregateEnum: aggregate.aggregateEnum.value,
+      aggregateArrayString: aggregate.aggregateArrayString.value,
+      aggregateArrayNumber: aggregate.aggregateArrayNumber.value,
+    });
+  });
+
+  it('Aggregate whit null', () => {
+    const aggregate = new AggregateObjectMotherNull();
+    expect(toPrimitives(aggregate)).toEqual({
+      aggregateId: aggregate.aggregateId.value,
+      aggregateString: null,
+      aggregateBoolean: null,
+      aggregateDate: null,
+      aggregateNumber: null,
+      aggregateUuid: null,
+      aggregateEnum: null,
+      aggregateArrayString: null,
+      aggregateArrayNumber: null,
+    });
+  });
+
+  it('Aggregate whit poperties not instance', () => {
+    const aggregate = new AggregateObjectMotherNotInstance();
+    console.log(toPrimitives(aggregate));
+    expect(toPrimitives(aggregate)).toEqual({
+      aggregateId: aggregate.aggregateId.value,
+      aggregateString: null,
+      aggregateBoolean: null,
+      aggregateDate: null,
+      aggregateNumber: null,
+      aggregateUuid: null,
+      aggregateEnum: null,
+      aggregateArrayString: null,
+      aggregateArrayNumber: null,
+    });
   });
 });
