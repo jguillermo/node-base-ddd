@@ -1,14 +1,4 @@
-import {
-  ArrayType,
-  ArrayTypeString,
-  BooleanType,
-  DateType,
-  EnumType,
-  IdType,
-  NumberType,
-  StringType,
-  UuidType,
-} from '../type';
+import { IdType, StringType } from '../type';
 import { AggregateRoot } from '../aggregate';
 import { PrimitiveAggregate } from '../primitives/types/primitive-aggregate';
 import { EventBase } from './event-base';

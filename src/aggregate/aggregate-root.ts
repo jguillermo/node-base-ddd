@@ -1,8 +1,6 @@
 import { EventBase } from '../event';
-import { Exclude } from 'class-transformer';
 
 export abstract class AggregateRoot {
-  @Exclude()
   private domainEvents: EventBase[] = [];
 
   protected record<T extends EventBase>(event: T) {
