@@ -12,54 +12,54 @@ import {
   AggregateObjectMotherString,
   AggregateObjectMotherUuid,
 } from '../../../object-mother.spec';
-import { getAllPropertiesFromInstanceClass, toPrimitives } from './transform-to-primitives';
+import { getAllPropertiesFromInstanceClass, instanceToPrimitives } from './transform-to-primitives';
 
 describe('Primitives to primitive', () => {
   it('Id', () => {
     const aggregate = new AggregateObjectMotherId();
-    expect(toPrimitives(aggregate)).toEqual({ aggregateId: aggregate.aggregateId.value });
+    expect(instanceToPrimitives(aggregate)).toEqual({ aggregateId: aggregate.aggregateId.value });
   });
 
   it('String', () => {
     const aggregate = new AggregateObjectMotherString();
-    expect(toPrimitives(aggregate)).toEqual({ aggregateString: aggregate.aggregateString.value });
+    expect(instanceToPrimitives(aggregate)).toEqual({ aggregateString: aggregate.aggregateString.value });
   });
 
   it('Boolean', () => {
     const aggregate = new AggregateObjectMotherBoolean();
-    expect(toPrimitives(aggregate)).toEqual({ aggregateBoolean: aggregate.aggregateBoolean.value });
+    expect(instanceToPrimitives(aggregate)).toEqual({ aggregateBoolean: aggregate.aggregateBoolean.value });
   });
 
   it('Date', () => {
     const aggregate = new AggregateObjectMotherDate();
-    expect(toPrimitives(aggregate)).toEqual({ aggregateDate: aggregate.aggregateDate.value });
+    expect(instanceToPrimitives(aggregate)).toEqual({ aggregateDate: aggregate.aggregateDate.value });
   });
 
   it('Number', () => {
     const aggregate = new AggregateObjectMotherNumber();
-    expect(toPrimitives(aggregate)).toEqual({ aggregateNumber: aggregate.aggregateNumber.value });
+    expect(instanceToPrimitives(aggregate)).toEqual({ aggregateNumber: aggregate.aggregateNumber.value });
   });
 
   it('Uuid', () => {
     const aggregate = new AggregateObjectMotherUuid();
-    expect(toPrimitives(aggregate)).toEqual({ aggregateUuid: aggregate.aggregateUuid.value });
+    expect(instanceToPrimitives(aggregate)).toEqual({ aggregateUuid: aggregate.aggregateUuid.value });
   });
 
   it('Enum', () => {
     const aggregate = new AggregateObjectMotherEnum();
-    expect(toPrimitives(aggregate)).toEqual({ aggregateEnum: aggregate.aggregateEnum.value });
+    expect(instanceToPrimitives(aggregate)).toEqual({ aggregateEnum: aggregate.aggregateEnum.value });
   });
   it('ArrayString', () => {
     const aggregate = new AggregateObjectMotherArrayString();
-    expect(toPrimitives(aggregate)).toEqual({ aggregateArrayString: aggregate.aggregateArrayString.value });
+    expect(instanceToPrimitives(aggregate)).toEqual({ aggregateArrayString: aggregate.aggregateArrayString.value });
   });
   it('ArrayNumber', () => {
     const aggregate = new AggregateObjectMotherArrayNumber();
-    expect(toPrimitives(aggregate)).toEqual({ aggregateArrayNumber: aggregate.aggregateArrayNumber.value });
+    expect(instanceToPrimitives(aggregate)).toEqual({ aggregateArrayNumber: aggregate.aggregateArrayNumber.value });
   });
   it('Aggregate', () => {
     const aggregate = new AggregateObjectMother();
-    expect(toPrimitives(aggregate)).toEqual({
+    expect(instanceToPrimitives(aggregate)).toEqual({
       aggregateId: aggregate.aggregateId.value,
       aggregateString: aggregate.aggregateString.value,
       aggregateBoolean: aggregate.aggregateBoolean.value,
@@ -74,7 +74,7 @@ describe('Primitives to primitive', () => {
 
   it('Aggregate whit null', () => {
     const aggregate = new AggregateObjectMotherNull();
-    expect(toPrimitives(aggregate)).toEqual({
+    expect(instanceToPrimitives(aggregate)).toEqual({
       aggregateId: aggregate.aggregateId.value,
       aggregateString: null,
       aggregateBoolean: null,
@@ -89,7 +89,7 @@ describe('Primitives to primitive', () => {
 
   it('Aggregate whit poperties not instance, todo, en javascript no se envian las propiedades que no fueron instanciadas', () => {
     const aggregate = new AggregateObjectMotherNotInstance();
-    expect(toPrimitives(aggregate)).toEqual({
+    expect(instanceToPrimitives(aggregate)).toEqual({
       aggregateId: aggregate.aggregateId.value,
       // aggregateString: null,
       // aggregateBoolean: null,
