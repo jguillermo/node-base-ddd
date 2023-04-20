@@ -1,37 +1,194 @@
-import { EnumType, StringType, StringTypeImp } from '../../../type';
-import { toPrimitives } from './transform-to-primitives';
-import { AggregateRoot } from '../../../aggregate';
-import { PrimitiveAggregate } from '../../types/primitive-aggregate';
+import {
+  AggregateObjectMother,
+  AggregateObjectMotherArrayNumber,
+  AggregateObjectMotherArrayString,
+  AggregateObjectMotherBoolean,
+  AggregateObjectMotherDate,
+  AggregateObjectMotherEnum,
+  AggregateObjectMotherId,
+  AggregateObjectMotherNotInstance,
+  AggregateObjectMotherNull,
+  AggregateObjectMotherNumber,
+  AggregateObjectMotherString,
+  AggregateObjectMotherUuid,
+} from '../../../object-mother.spec';
+import { getAllPropertiesFromInstanceClass, toPrimitives } from './transform-to-primitives';
 
-enum EnumCourseStatus {
-  'CREATED' = 'created',
-  'DELETED' = 'deleted',
-}
+describe('Primitives to primitive', () => {
+  it('Id', () => {
+    const aggregate = new AggregateObjectMotherId();
+    expect(toPrimitives(aggregate)).toEqual({ aggregateId: aggregate.aggregateId.value });
+  });
 
-export class CourseStatus extends EnumType<EnumCourseStatus> {
-  constructor(value: keyof typeof EnumCourseStatus | null | undefined = null) {
-    super(EnumType.create<EnumCourseStatus>(value, Object.values(EnumCourseStatus)));
-  }
-}
+  it('String', () => {
+    const aggregate = new AggregateObjectMotherString();
+    expect(toPrimitives(aggregate)).toEqual({ aggregateString: aggregate.aggregateString.value });
+  });
 
-class ClsStringType extends AggregateRoot<ClsStringType> {
-  readonly propertieString: StringType;
+  it('Boolean', () => {
+    const aggregate = new AggregateObjectMotherBoolean();
+    expect(toPrimitives(aggregate)).toEqual({ aggregateBoolean: aggregate.aggregateBoolean.value });
+  });
 
-  toPrimitives(): PrimitiveAggregate<ClsStringType> {
-    return {
-      propertieString: this.propertieString.value,
-    };
-  }
+  it('Date', () => {
+    const aggregate = new AggregateObjectMotherDate();
+    expect(toPrimitives(aggregate)).toEqual({ aggregateDate: aggregate.aggregateDate.value });
+  });
 
-  constructor() {
-    super();
-    this.propertieString = new StringTypeImp('test');
-  }
-}
+  it('Number', () => {
+    const aggregate = new AggregateObjectMotherNumber();
+    expect(toPrimitives(aggregate)).toEqual({ aggregateNumber: aggregate.aggregateNumber.value });
+  });
 
-describe('Primitives', () => {
-  it('should ensure to only return primitive properties excluding methods', () => {
-    const data = toPrimitives(new ClsStringType());
-    expect(data).toEqual({ propertieString: 'test' });
+  it('Uuid', () => {
+    const aggregate = new AggregateObjectMotherUuid();
+    expect(toPrimitives(aggregate)).toEqual({ aggregateUuid: aggregate.aggregateUuid.value });
+  });
+
+  it('Enum', () => {
+    const aggregate = new AggregateObjectMotherEnum();
+    expect(toPrimitives(aggregate)).toEqual({ aggregateEnum: aggregate.aggregateEnum.value });
+  });
+  it('ArrayString', () => {
+    const aggregate = new AggregateObjectMotherArrayString();
+    expect(toPrimitives(aggregate)).toEqual({ aggregateArrayString: aggregate.aggregateArrayString.value });
+  });
+  it('ArrayNumber', () => {
+    const aggregate = new AggregateObjectMotherArrayNumber();
+    expect(toPrimitives(aggregate)).toEqual({ aggregateArrayNumber: aggregate.aggregateArrayNumber.value });
+  });
+  it('Aggregate', () => {
+    const aggregate = new AggregateObjectMother();
+    expect(toPrimitives(aggregate)).toEqual({
+      aggregateId: aggregate.aggregateId.value,
+      aggregateString: aggregate.aggregateString.value,
+      aggregateBoolean: aggregate.aggregateBoolean.value,
+      aggregateDate: aggregate.aggregateDate.value,
+      aggregateNumber: aggregate.aggregateNumber.value,
+      aggregateUuid: aggregate.aggregateUuid.value,
+      aggregateEnum: aggregate.aggregateEnum.value,
+      aggregateArrayString: aggregate.aggregateArrayString.value,
+      aggregateArrayNumber: aggregate.aggregateArrayNumber.value,
+    });
+  });
+
+  it('Aggregate whit null', () => {
+    const aggregate = new AggregateObjectMotherNull();
+    expect(toPrimitives(aggregate)).toEqual({
+      aggregateId: aggregate.aggregateId.value,
+      aggregateString: null,
+      aggregateBoolean: null,
+      aggregateDate: null,
+      aggregateNumber: null,
+      aggregateUuid: null,
+      aggregateEnum: null,
+      aggregateArrayString: null,
+      aggregateArrayNumber: null,
+    });
+  });
+
+  it('Aggregate whit poperties not instance, todo, en javascript no se envian las propiedades que no fueron instanciadas', () => {
+    const aggregate = new AggregateObjectMotherNotInstance();
+    expect(toPrimitives(aggregate)).toEqual({
+      aggregateId: aggregate.aggregateId.value,
+      // aggregateString: null,
+      // aggregateBoolean: null,
+      // aggregateDate: null,
+      // aggregateNumber: null,
+      // aggregateUuid: null,
+      // aggregateEnum: null,
+      // aggregateArrayString: null,
+      // aggregateArrayNumber: null,
+    });
+  });
+});
+
+describe('getAllPropertiesFromInstanceClass_function', () => {
+  test('test_allCasesCombined', () => {
+    // Define test object with all possible cases
+    class TestObject {
+      public property1: string;
+      private _property2: number;
+      protected property3: boolean;
+      static property4: string;
+      domainEvents: any[];
+      constructor() {
+        this.property1 = 'test';
+        this._property2 = 123;
+        this.property3 = true;
+        TestObject.property4 = 'static';
+        this.domainEvents = [];
+      }
+      get property2() {
+        return this._property2;
+      }
+      set property2(value: number) {
+        this._property2 = value;
+      }
+    }
+    const testObj = new TestObject();
+    const result = getAllPropertiesFromInstanceClass(testObj);
+    expect(result).toEqual(['property1', 'property2', 'property3']);
+  });
+  test('test_noLeadingUnderscores', () => {
+    // Define test object with leading underscores
+    class TestObject {
+      public property1: string;
+      private _property2: number;
+      protected _property3: boolean;
+      constructor() {
+        this.property1 = 'test';
+        this._property2 = 123;
+        this._property3 = true;
+      }
+    }
+    const testObj = new TestObject();
+    const result = getAllPropertiesFromInstanceClass(testObj);
+    expect(result).toEqual(['property1', 'property2', 'property3']);
+  });
+  test('test_onlyUnwantedProperties', () => {
+    // Define test object with only unwanted properties
+    class TestObject {
+      domainEvents: any[];
+      constructor() {
+        this.domainEvents = [];
+      }
+    }
+    const testObj = new TestObject();
+    const result = getAllPropertiesFromInstanceClass(testObj);
+    expect(result).toEqual([]);
+  });
+  test('test_propertiesWithNonStringValues', () => {
+    // Define test object with properties with non-string values
+    class TestObject {
+      public property1: number;
+      private _property2: boolean;
+      constructor() {
+        this.property1 = 123;
+        this._property2 = true;
+      }
+      get property2() {
+        return this._property2;
+      }
+      set property2(value: boolean) {
+        this._property2 = value;
+      }
+    }
+    const testObj = new TestObject();
+    const result = getAllPropertiesFromInstanceClass(testObj);
+    expect(result).toEqual(['property1', 'property2']);
+  });
+  test('test_propertiesWithCircularReferences', () => {
+    // Define test object with properties with circular references
+    class TestObject {
+      public property1: any;
+      constructor() {
+        this.property1 = { test: 'test' };
+        this.property1.circularRef = this.property1;
+      }
+    }
+    const testObj = new TestObject();
+    const result = getAllPropertiesFromInstanceClass(testObj);
+    expect(result).toEqual(['property1']);
   });
 });
