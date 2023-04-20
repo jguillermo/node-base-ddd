@@ -1,7 +1,7 @@
 import { AggregateRoot } from '../../../aggregate';
 import { IdTypeImp } from '../../../type';
 import { faker } from '@faker-js/faker';
-import { PropertieToPrimitive, toPrimitives } from './transform-to-primitives';
+import { instanceToPrimitives, PropertieToPrimitive } from './transform-to-primitives';
 import { PrimitiveAggregate } from '../../types/primitive-aggregate';
 
 export class AggregateObjectMotherId extends AggregateRoot implements PropertieToPrimitive<AggregateObjectMotherId> {
@@ -13,7 +13,7 @@ export class AggregateObjectMotherId extends AggregateRoot implements PropertieT
   }
 
   toPrimitives(): PrimitiveAggregate<AggregateObjectMotherId> {
-    return toPrimitives(this);
+    return instanceToPrimitives(this);
   }
 }
 

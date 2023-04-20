@@ -40,8 +40,10 @@
     "co": "git-cz"
   },
   "dependencies": {
+    "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "dayjs": "^1.11.7",
+    "reflect-metadata": "^0.1.13",
     "underscore.string": "^3.3.6",
     "uuid": "^9.0.0"
   },

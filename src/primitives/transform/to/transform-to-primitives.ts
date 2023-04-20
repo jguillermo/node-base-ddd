@@ -5,7 +5,7 @@ export interface PropertieToPrimitive<T extends AggregateRoot> {
   toPrimitives(): PrimitiveAggregate<T>;
 }
 
-export function toPrimitives<T extends AggregateRoot>(aggregate: T): PrimitiveAggregate<T> {
+export function instanceToPrimitives<T extends AggregateRoot>(aggregate: T): PrimitiveAggregate<T> {
   const properties = {};
   getAllPropertiesFromInstanceClass(aggregate).forEach((property) => {
     properties[property] = aggregate[property].value;

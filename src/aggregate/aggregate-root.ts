@@ -12,9 +12,4 @@ export abstract class AggregateRoot {
     this.domainEvents = [];
     return events;
   }
-
-  // protected recordBy(eventClass: any) {
-  //   const event = plainToInstance(eventClass, this.toPrimitives()) as EventBase;
-  //   this.domainEvents.push(event);
-  // }
 }
