@@ -1,6 +1,10 @@
 import { PrimitiveAggregate } from '../../types/primitive-aggregate';
 import { AggregateRoot } from '../../../aggregate';
 
+export interface PropertieToPrimitive<T extends AggregateRoot> {
+  toPrimitives(): PrimitiveAggregate<T>;
+}
+
 export function toPrimitives<T extends AggregateRoot>(aggregate: T): PrimitiveAggregate<T> {
   const properties = {};
   getAllPropertiesFromInstanceClass(aggregate).forEach((property) => {
