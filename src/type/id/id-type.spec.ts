@@ -1,5 +1,7 @@
 import { ValueGenerator } from '../abstract-type.spec';
 import { IdTypeImp } from './';
+import { ValueObjectValue } from '../../primitives/types/primitive-aggregate';
+import { expectTypeOf } from 'expect-type';
 
 const UUID_4_VALUE = 'df9ef000-21fc-4e06-b8f7-103c3a133d10';
 describe('Id Type', () => {
@@ -113,5 +115,13 @@ describe('Id Type', () => {
       type = new IdTypeImp(UUID_4_VALUE);
       expect(type.toString).toEqual(UUID_4_VALUE);
     });
+  });
+});
+
+describe('primitiveId not null', () => {
+  it('should primitive is not null', () => {
+    type actualPrimitives = ValueObjectValue<IdTypeImp>;
+    type expectedPrimitives = string;
+    expectTypeOf<actualPrimitives>().toEqualTypeOf<expectedPrimitives>();
   });
 });
