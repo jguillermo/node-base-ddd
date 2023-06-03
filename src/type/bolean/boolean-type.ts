@@ -1,6 +1,6 @@
-import { AbstractType } from '../abstract-type';
+import { AbstractType, ValueTypeNullable } from '../abstract-type';
 
-export abstract class BooleanType extends AbstractType<boolean> {
+export abstract class BooleanType extends AbstractType<ValueTypeNullable<boolean>> {
   get toString(): string {
     if (this.isNull) {
       return '';

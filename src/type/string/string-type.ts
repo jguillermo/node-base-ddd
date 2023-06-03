@@ -1,5 +1,5 @@
 import validator from 'validator';
-import { AbstractType } from '../abstract-type';
+import { AbstractType, ValueTypeNullable } from '../abstract-type';
 import isEmptyValidator = validator.isEmpty;
 import isLengthValidator = validator.isLength;
 
@@ -9,7 +9,7 @@ export interface StringIsLengthValidator {
   exactly?: number;
 }
 
-export abstract class StringType extends AbstractType<string> {
+export abstract class StringType extends AbstractType<ValueTypeNullable<string>> {
   get isEmpty(): boolean {
     if (this.isNull) {
       return true;

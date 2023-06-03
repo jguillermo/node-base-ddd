@@ -1,7 +1,7 @@
 import { isArray } from 'class-validator';
-import { AbstractType } from '../abstract-type';
+import { AbstractType, ValueTypeNullable } from '../abstract-type';
 
-export abstract class ArrayType<T> extends AbstractType<Array<T>> {
+export abstract class ArrayType<T> extends AbstractType<ValueTypeNullable<Array<T>>> {
   get toString(): string {
     return this.value ? this.value.toString() : '';
   }

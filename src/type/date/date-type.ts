@@ -1,10 +1,10 @@
 import * as dayjs from 'dayjs';
 import * as utc from 'dayjs/plugin/utc';
-import { AbstractType } from '../abstract-type';
+import { AbstractType, ValueTypeNullable } from '../abstract-type';
 
 dayjs.extend(utc);
 
-export abstract class DateType extends AbstractType<Date> {
+export abstract class DateType extends AbstractType<ValueTypeNullable<Date>> {
   constructor(value: any = null) {
     super(value);
   }
