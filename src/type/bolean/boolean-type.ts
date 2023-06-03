@@ -1,6 +1,8 @@
 import { AbstractType, ValueTypeNullable } from '../abstract-type';
 
-export abstract class BooleanType extends AbstractType<ValueTypeNullable<boolean>> {
+type BooleanTypes = boolean | null;
+
+export abstract class BooleanType<TT extends BooleanTypes = ValueTypeNullable<boolean>> extends AbstractType<TT> {
   get toString(): string {
     if (this.isNull) {
       return '';
@@ -8,18 +10,18 @@ export abstract class BooleanType extends AbstractType<ValueTypeNullable<boolean
     return this.value ? 'true' : 'false';
   }
 
-  protected filter(value: any): boolean | null {
+  protected filter(value: any): TT {
     if (value === null) {
-      return null;
+      return <TT>(<any>null);
     }
     if (typeof value === 'string') {
       if (value === 'false') {
-        return false;
+        return <TT>false;
       }
       if (value === 'true') {
-        return true;
+        return <TT>true;
       }
     }
-    return !!value;
+    return <TT>!!value;
   }
 }
