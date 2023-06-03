@@ -1,7 +1,7 @@
 import { ValueGenerator } from '../abstract-type.spec';
-import { BooleanTypeImp } from './';
+import { BooleanRequiredTypeImp, BooleanTypeImp } from './';
 
-describe('String Type', () => {
+describe('Boolean Type', () => {
   let type: BooleanTypeImp;
   describe('constructor set values', () => {
     describe('valid boolean', () => {
@@ -109,6 +109,35 @@ describe('String Type', () => {
       it('undefined equals null', () => {
         type = new BooleanTypeImp(undefined);
         expect(type.toString).toEqual('');
+      });
+    });
+  });
+});
+
+describe('Boolean required Type', () => {
+  describe('constructor set values', () => {
+    describe('valid boolean', () => {
+      it('true', () => {
+        const type = new BooleanRequiredTypeImp(true);
+        expect(type.value).toEqual(true);
+      });
+      it('false', () => {
+        const type = new BooleanRequiredTypeImp(false);
+        expect(type.value).toEqual(false);
+      });
+    });
+    describe('null value', () => {
+      it('null', () => {
+        expect(() => {
+          new BooleanRequiredTypeImp();
+        }).toThrow(`is required.`);
+      });
+    });
+    describe('undefined', () => {
+      it('undefined equals null', () => {
+        expect(() => {
+          new BooleanRequiredTypeImp(undefined);
+        }).toThrow(`is required.`);
       });
     });
   });
