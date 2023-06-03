@@ -6,7 +6,7 @@ export type ValueTypeRequired<T> = T;
 export abstract class AbstractType<T> implements ValidatorInterface {
   protected _value: T;
 
-  constructor(value: T | null = null) {
+  constructor(value: any = null) {
     this._value = this.filter(value);
   }
 
