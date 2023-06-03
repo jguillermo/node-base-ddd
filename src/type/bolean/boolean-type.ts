@@ -25,3 +25,12 @@ export abstract class BooleanType<TT extends BooleanTypes = ValueTypeNullable<bo
     return <TT>!!value;
   }
 }
+
+export abstract class BooleanRequiredType extends BooleanType<boolean> {
+  protected filter(value: any): boolean {
+    if (value === null) {
+      throw new Error(`is required.`);
+    }
+    return super.filter(value);
+  }
+}
