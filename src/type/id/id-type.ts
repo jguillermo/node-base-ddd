@@ -1,7 +1,7 @@
 import { UuidType } from '../uuid/';
 
-export abstract class IdType extends UuidType {
-  protected filter(value: any): string | null {
+export abstract class IdType extends UuidType<string> {
+  protected filter(value: any): string {
     if (value === null) {
       throw new Error(`is required.`);
     }
