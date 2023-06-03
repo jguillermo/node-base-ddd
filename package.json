@@ -14,7 +14,7 @@
     "url": "https://github.com/jguillermo/node-base-ddd"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   },
   "publishConfig": {
     "access": "public"

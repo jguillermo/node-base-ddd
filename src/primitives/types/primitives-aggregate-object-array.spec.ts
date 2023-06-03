@@ -18,7 +18,7 @@ describe('Primitives', () => {
   it('should ensure to only return primitive properties excluding methods', () => {
     type actualPrimitives = PrimitiveAggregate<Course>;
     type expectedPrimitives = {
-      readonly courseCustomers: (string | null)[] | null;
+      readonly courseCustomers: string[] | null;
     };
     expectTypeOf<actualPrimitives>().toEqualTypeOf<expectedPrimitives>();
   });
