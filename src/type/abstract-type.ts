@@ -1,13 +1,16 @@
 import { ValidatorInterface } from '../validator';
 
-export abstract class AbstractType<T> implements ValidatorInterface {
-  protected _value: T | null;
+export type ValueTypeNullable<T> = T | null;
+export type ValueTypeRequired<T> = T;
 
-  constructor(value: T | null = null) {
+export abstract class AbstractType<T> implements ValidatorInterface {
+  protected _value: T;
+
+  constructor(value: any = null) {
     this._value = this.filter(value);
   }
 
-  get value(): T | null {
+  get value(): T {
     return this._value;
   }
 
@@ -29,5 +32,5 @@ export abstract class AbstractType<T> implements ValidatorInterface {
 
   abstract get toString(): string;
 
-  protected abstract filter(value: any): T | null;
+  protected abstract filter(value: any): T;
 }

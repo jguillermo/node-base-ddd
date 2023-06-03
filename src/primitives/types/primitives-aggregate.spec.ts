@@ -7,7 +7,7 @@ describe('Primitives', () => {
     type actualPrimitives = PrimitiveAggregate<AggregateObjectMother>;
     // type actualPrimitives
     type expectedPrimitives = {
-      readonly aggregateId: string | null;
+      readonly aggregateId: string;
       readonly aggregateString: string | null;
       readonly aggregateBoolean: boolean | null;
       readonly aggregateDate: Date | null;

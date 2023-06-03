@@ -1,9 +1,9 @@
 import { v4 as uuidv4, v5 as uuidv5, validate as uuidValidate } from 'uuid';
-import { AbstractType } from '../abstract-type';
+import { AbstractType, ValueTypeNullable } from '../abstract-type';
 
 const DNS_NAMESPACE = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
 
-export abstract class UuidType extends AbstractType<string> {
+export abstract class UuidType<TT = ValueTypeNullable<string>> extends AbstractType<TT> {
   static random(): string {
     return uuidv4();
   }
@@ -12,9 +12,9 @@ export abstract class UuidType extends AbstractType<string> {
     return uuidv5(value, namespace);
   }
 
-  protected filter(value: any): string | null {
+  protected filter(value: any): TT {
     if (value === null) {
-      return null;
+      return <TT>(<any>null);
     }
     if (typeof value !== 'string') {
       throw new Error(`invalid uuid value.`);
@@ -22,7 +22,7 @@ export abstract class UuidType extends AbstractType<string> {
     if (!uuidValidate(value)) {
       throw new Error(`invalid uuid value.`);
     }
-    return <string>value;
+    return <TT>value;
   }
 
   get toString(): string {

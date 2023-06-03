@@ -1,6 +1,6 @@
-import { AbstractType } from '../abstract-type';
+import { AbstractType, ValueTypeNullable } from '../abstract-type';
 
-export abstract class NumberType extends AbstractType<number> {
+export abstract class NumberType extends AbstractType<ValueTypeNullable<number>> {
   get toString(): string {
     if (this.isNull) {
       return '';

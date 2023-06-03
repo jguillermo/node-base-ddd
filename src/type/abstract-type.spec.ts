@@ -1,4 +1,4 @@
-import { AbstractType } from './abstract-type';
+import { AbstractType, ValueTypeNullable } from './abstract-type';
 
 export class ValueGenerator {
   static valueString(value: string): any {
@@ -18,7 +18,7 @@ export class ValueGenerator {
   }
 }
 
-class TestBaseType extends AbstractType<string> {
+class TestBaseType extends AbstractType<ValueTypeNullable<string>> {
   get toString(): string {
     if (this.isNull) {
       return '';
