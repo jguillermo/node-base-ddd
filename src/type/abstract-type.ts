@@ -10,7 +10,7 @@ export abstract class AbstractType<T> implements ValidatorInterface {
     this._value = this.filter(value);
   }
 
-  get value(): T | null {
+  get value(): T {
     return this._value;
   }
 
